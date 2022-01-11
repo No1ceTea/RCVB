@@ -22,19 +22,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `adherents` (
   `idAdh` int(4) NOT NULL,
-  `nom` char(20) COLLATE utf8_bin NOT NULL,
-  `prenom` char(40) COLLATE utf8_bin NOT NULL,
+  `nom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
   `dateNaiss` date NOT NULL,
-  `lieuNaiss` char(30) COLLATE utf8_bin NOT NULL,
+  `lieuNaiss` varchar(40) COLLATE utf8_bin NOT NULL,
   `adresse` varchar(80) COLLATE utf8_bin NOT NULL,
-  `ville` varchar(30) COLLATE utf8_bin NOT NULL,
+  `ville` varchar(40) COLLATE utf8_bin NOT NULL,
   `cp` char(5) COLLATE utf8_bin NOT NULL,
   `telPortable` char(10) COLLATE utf8_bin DEFAULT NULL,
   `telDomicile` char(10) COLLATE utf8_bin DEFAULT NULL,
-  `mail` char(80) COLLATE utf8_bin DEFAULT NULL,
-  `nationalite` char(20) COLLATE utf8_bin NOT NULL,
+  `mail` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `nationalite` varchar(30) COLLATE utf8_bin NOT NULL,
   `numSS` char(15) COLLATE utf8_bin NOT NULL,
-  `idP` int(11) NOT NULL,
+  `idP` int(5) NOT NULL,
   `pieceIdentite` longblob NOT NULL,
   `photo` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -56,8 +56,8 @@ INSERT INTO `adherents` (`idAdh`, `nom`, `prenom`, `dateNaiss`, `lieuNaiss`, `ad
 --
 
 CREATE TABLE `categorie` (
-  `numCat` char(5) COLLATE utf8_bin NOT NULL,
-  `nomCat` char(20) COLLATE utf8_bin NOT NULL,
+  `idCat` varchar(4) COLLATE utf8_bin NOT NULL,
+  `nomCat` varchar(20) COLLATE utf8_bin NOT NULL,
   `idResp` int(2) DEFAULT NULL,
   `idEntrn` int(2) DEFAULT NULL,
   `prix` float NOT NULL
@@ -67,7 +67,7 @@ CREATE TABLE `categorie` (
 -- Dumping data for table `categorie`
 --
 
-INSERT INTO `categorie` (`numCat`, `nomCat`, `idResp`, `idEntrn`, `prix`) VALUES
+INSERT INTO `categorie` (`idCat`, `nomCat`, `idResp`, `idEntrn`, `prix`) VALUES
 ('RA', 'rugby adapte', NULL, NULL, 0),
 ('RC', 'rugby cancer', NULL, NULL, 0),
 ('RL', 'rugby loisir', NULL, NULL, 150),
@@ -89,13 +89,13 @@ INSERT INTO `categorie` (`numCat`, `nomCat`, `idResp`, `idEntrn`, `prix`) VALUES
 --
 
 CREATE TABLE `dirigeant` (
-  `idDirigeant` int(11) NOT NULL,
-  `nom` char(35) COLLATE utf8_bin NOT NULL,
-  `prenom` char(55) COLLATE utf8_bin NOT NULL,
-  `login` char(35) COLLATE utf8_bin NOT NULL,
-  `mdp` char(35) COLLATE utf8_bin NOT NULL,
-  `mail` char(45) COLLATE utf8_bin NOT NULL,
-  `telPortable` char(15) COLLATE utf8_bin NOT NULL
+  `idDirigeant` int(2) NOT NULL,
+  `nom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `login` varchar(35) COLLATE utf8_bin NOT NULL,
+  `mdp` varchar(35) COLLATE utf8_bin NOT NULL,
+  `mail` varchar(255) COLLATE utf8_bin NOT NULL,
+  `telPortable` char(10) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -113,11 +113,11 @@ INSERT INTO `dirigeant` (`idDirigeant`, `nom`, `prenom`, `login`, `mdp`, `mail`,
 
 CREATE TABLE `entrainements` (
   `idEntrainement` int(2) NOT NULL,
-  `jours` char(20) COLLATE utf8_bin NOT NULL,
+  `jours` varchar(20) COLLATE utf8_bin NOT NULL,
   `debut` char(5) COLLATE utf8_bin NOT NULL,
   `fin` char(5) COLLATE utf8_bin NOT NULL,
   `idTerrain` int(2) NOT NULL,
-  `idCat` char(5) COLLATE utf8_bin NOT NULL
+  `idCat` varchar(5) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -125,26 +125,26 @@ CREATE TABLE `entrainements` (
 --
 
 INSERT INTO `entrainements` (`idEntrainement`, `jours`, `debut`, `fin`, `idTerrain`, `idCat`) VALUES
-(1, 'Mercredi', '15h', '16h15', 1, 'U6'),
-(2, 'Mercredi', '15h', '16h30', 1, 'U8'),
-(3, 'Mercredi', '16h', '17h30', 1, 'U10'),
-(4, 'Mercredi', '17h', '18h30', 1, 'U12'),
-(5, 'Mercredi', '18h', '19h30', 2, 'U14'),
-(6, 'Vendredi', '18h', '19h30', 1, 'U14'),
-(7, 'Mardi', '19h', '20h30', 1, 'U16'),
-(8, 'Vendredi', '18h', '20h', 4, 'U16'),
-(9, 'Mercredi', '19h', '20h30', 1, 'U18'),
-(10, 'Vendredi', '19h30', '21h', 4, 'U18'),
-(11, 'Mardi', '20h', '22h', 1, 'U20'),
-(12, 'Jeudi', '20h', '22h', 2, 'U20'),
-(13, 'Mardi', '19h', '20h30', 1, 'U19'),
-(14, 'Vendredi', '19h', '20h30', 4, 'U19'),
-(15, 'Mercredi', '19h', '20h30', 1, 'U20F'),
-(16, 'Mercredi', '19h30', '21h', 4, 'U20F'),
-(17, 'Samedi', '10h', '12h', 2, 'RA'),
-(18, 'Lundi', '19h15', '20h', 1, 'RL'),
+(1, 'Mercredi', '15h00', '16h15', 1, 'U6'),
+(2, 'Mercredi', '15h00', '16h30', 1, 'U8'),
+(3, 'Mercredi', '16h00', '17h30', 1, 'U10'),
+(4, 'Mercredi', '17h00', '18h30', 1, 'U12'),
+(5, 'Mercredi', '18h00', '19h30', 2, 'U14'),
+(6, 'Vendredi', '18h00', '19h30', 1, 'U14'),
+(7, 'Mardi', '19h00', '20h30', 1, 'U16'),
+(8, 'Vendredi', '18h00', '20h00', 4, 'U16'),
+(9, 'Mercredi', '19h00', '20h30', 1, 'U18'),
+(10, 'Vendredi', '19h30', '21h00', 4, 'U18'),
+(11, 'Mardi', '20h00', '22h00', 1, 'U20'),
+(12, 'Jeudi', '20h00', '22h00', 2, 'U20'),
+(13, 'Mardi', '19h00', '20h30', 1, 'U19'),
+(14, 'Vendredi', '19h00', '20h30', 4, 'U19'),
+(15, 'Mercredi', '19h00', '20h30', 1, 'U20F'),
+(16, 'Mercredi', '19h30', '21h00', 4, 'U20F'),
+(17, 'Samedi', '10h00', '12h00', 2, 'RA'),
+(18, 'Lundi', '19h15', '20h00', 1, 'RL'),
 (19, 'Mardi', '11h45', '12h45', 5, 'RC'),
-(20, 'Samedi', '10h', '11h', 2, 'RC');
+(20, 'Samedi', '10h00', '11h00', 2, 'RC');
 
 -- --------------------------------------------------------
 
@@ -154,9 +154,9 @@ INSERT INTO `entrainements` (`idEntrainement`, `jours`, `debut`, `fin`, `idTerra
 
 CREATE TABLE `entraineurs` (
   `idEntrn` int(2) NOT NULL,
-  `nom` char(20) COLLATE utf8_bin NOT NULL,
-  `prenom` char(40) COLLATE utf8_bin NOT NULL,
-  `mail` char(80) COLLATE utf8_bin DEFAULT NULL,
+  `nom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `mail` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `telephone` char(10) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -182,7 +182,7 @@ INSERT INTO `entraineurs` (`idEntrn`, `nom`, `prenom`, `mail`, `telephone`) VALU
 CREATE TABLE `inscrits` (
   `idInscrit` int(2) NOT NULL,
   `idAdh` int(2) NOT NULL,
-  `idCat` char(5) COLLATE utf8_bin NOT NULL
+  `idCat` varchar(4) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -193,16 +193,16 @@ CREATE TABLE `inscrits` (
 
 CREATE TABLE `parents` (
   `idParent` int(5) NOT NULL,
-  `nom` char(30) COLLATE utf8_bin NOT NULL,
-  `prenom` char(30) COLLATE utf8_bin NOT NULL,
-  `adresse` char(80) COLLATE utf8_bin NOT NULL,
-  `profession` char(30) COLLATE utf8_bin NOT NULL,
-  `ville` char(30) COLLATE utf8_bin NOT NULL,
-  `cp` char(15) COLLATE utf8_bin NOT NULL,
-  `telPor` char(15) COLLATE utf8_bin NOT NULL,
-  `telDom` char(15) COLLATE utf8_bin NOT NULL,
-  `mail` char(55) COLLATE utf8_bin NOT NULL,
-  `lienParente` char(20) COLLATE utf8_bin NOT NULL,
+  `nom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `adresse` varchar(80) COLLATE utf8_bin NOT NULL,
+  `profession` varchar(40) COLLATE utf8_bin NOT NULL,
+  `ville` varchar(30) COLLATE utf8_bin NOT NULL,
+  `cp` char(5) COLLATE utf8_bin NOT NULL,
+  `telPor` char(10) COLLATE utf8_bin NOT NULL,
+  `telDom` char(10) COLLATE utf8_bin NOT NULL,
+  `mail` char(255) COLLATE utf8_bin NOT NULL,
+  `lienParente` varchar(15) COLLATE utf8_bin NOT NULL,
   `pieceIdentiteP` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -228,10 +228,11 @@ INSERT INTO `parents` (`idParent`, `nom`, `prenom`, `adresse`, `profession`, `vi
 
 CREATE TABLE `responsable` (
   `idResp` int(2) NOT NULL,
-  `nom` char(20) COLLATE utf8_bin NOT NULL,
-  `prenom` char(40) COLLATE utf8_bin NOT NULL,
-  `mail` char(80) COLLATE utf8_bin NOT NULL,
-  `telephone` char(15) COLLATE utf8_bin DEFAULT NULL
+  `nom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `mail` varchar(255) COLLATE utf8_bin NOT NULL,
+  `telephone` char(10) COLLATE utf8_bin DEFAULT NULL,
+  `poste` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -253,7 +254,11 @@ INSERT INTO `responsable` (`idResp`, `nom`, `prenom`, `mail`, `telephone`) VALUE
 
 CREATE TABLE `terrains` (
   `idTerrain` int(2) NOT NULL,
-  `nomTerrain` char(50) COLLATE utf8_bin NOT NULL
+  `nomTerrain` char(50) COLLATE utf8_bin NOT NULL,
+  `ville` varchar(30) COLLATE utf8_bin NOT NULL,
+  `cp` char(5) COLLATE utf8_bin NOT NULL,
+  `adresse` varchar(80) COLLATE utf8_bin NOT NULL,
+  `transport` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -282,7 +287,7 @@ ALTER TABLE `adherents`
 -- Indexes for table `categorie`
 --
 ALTER TABLE `categorie`
-  ADD PRIMARY KEY (`numCat`),
+  ADD PRIMARY KEY (`idCat`),
   ADD KEY `fk_responsable` (`idResp`),
   ADD KEY `fk_entraineur` (`idEntrn`);
 
@@ -346,7 +351,7 @@ ALTER TABLE `adherents`
 -- AUTO_INCREMENT for table `dirigeant`
 --
 ALTER TABLE `dirigeant`
-  MODIFY `idDirigeant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDirigeant` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `entrainements`
@@ -399,7 +404,7 @@ ALTER TABLE `categorie`
 -- Constraints for table `entrainements`
 --
 ALTER TABLE `entrainements`
-  ADD CONSTRAINT `fk_categories` FOREIGN KEY (`idCat`) REFERENCES `categorie` (`numCat`),
+  ADD CONSTRAINT `fk_categories` FOREIGN KEY (`idCat`) REFERENCES `categorie` (`idCat`),
   ADD CONSTRAINT `fk_terrain` FOREIGN KEY (`idTerrain`) REFERENCES `terrains` (`idTerrain`),
   ADD CONSTRAINT `fk_terrains` FOREIGN KEY (`idTerrain`) REFERENCES `terrains` (`idTerrain`);
 
@@ -408,4 +413,4 @@ ALTER TABLE `entrainements`
 --
 ALTER TABLE `inscrits`
   ADD CONSTRAINT `fk_idAdh` FOREIGN KEY (`idAdh`) REFERENCES `adherents` (`idAdh`),
-  ADD CONSTRAINT `fk_idCat` FOREIGN KEY (`idCat`) REFERENCES `categorie` (`numCat`);
+  ADD CONSTRAINT `fk_idCat` FOREIGN KEY (`idCat`) REFERENCES `categorie` (`idCat`);

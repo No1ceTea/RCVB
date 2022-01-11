@@ -17,9 +17,9 @@
 
 class PdoRugby{   		
       	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=rugby';   		
+      	private static $bdd='dbname=rcvb';   		
       	private static $user='root' ;    		
-      	private static $mdp='root' ;	
+      	private static $mdp='' ;	
 		private static $monPdo;
 		private static $monPdoRugby=null;
 /**
