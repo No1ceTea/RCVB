@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 14 jan. 2022 à 15:47
+-- Généré le : jeu. 20 jan. 2022 à 15:56
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `rcvb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `actualites`
+--
+
+DROP TABLE IF EXISTS `actualites`;
+CREATE TABLE IF NOT EXISTS `actualites` (
+  `idActu` int(3) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(100) DEFAULT NULL,
+  `texte` text,
+  `datePublication` datetime DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idActu`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -44,61 +60,35 @@ CREATE TABLE IF NOT EXISTS `adherents` (
   `numSS` char(15) COLLATE utf8_bin NOT NULL,
   `idP` int(5) DEFAULT NULL,
   `idCat` varchar(4) COLLATE utf8_bin DEFAULT NULL,
+  `idAutorisation` int(4) NOT NULL,
+  `idPC` int(4) DEFAULT NULL,
+  `idCharte` int(4) DEFAULT NULL,
+  `idMT` int(3) DEFAULT NULL,
   PRIMARY KEY (`idAdh`),
   KEY `fk_idParent` (`idP`),
-  KEY `idCat` (`idCat`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `idCat` (`idCat`),
+  KEY `idAutorisation` (`idAutorisation`),
+  KEY `idPC` (`idPC`),
+  KEY `idCharte` (`idCharte`),
+  KEY `idMT` (`idMT`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `adherents`
+-- Structure de la table `autorisation`
 --
 
-INSERT INTO `adherents` (`idAdh`, `nom`, `prenom`, `dateNaiss`, `lieuNaiss`, `adresse`, `ville`, `cp`, `telPortable`, `telDomicile`, `mail`, `nationalite`, `numSS`, `idP`, `idCat`) VALUES
-(56, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(57, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(58, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(59, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(60, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(61, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(62, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(63, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(64, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(65, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(66, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(67, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(68, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(69, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(70, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(71, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(72, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(73, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(74, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(75, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(76, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(77, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(78, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(79, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(80, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(81, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(82, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(83, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(84, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(85, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(86, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(87, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(88, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(89, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(90, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(91, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(92, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(93, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(94, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(95, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(96, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(97, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(98, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(99, 'qdzqd', 'zqdq', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL),
-(100, 'aaa', 'bbb', '2021-12-31', 'qzdqdq', 'dqd', 'dqdd', '55444', '05 04 05 05 06', '04 08 09 09 08', 'dqdq@gmail.com', 'dqfdq', '555555555555555', NULL, NULL);
+DROP TABLE IF EXISTS `autorisation`;
+CREATE TABLE IF NOT EXISTS `autorisation` (
+  `idAutorisation` int(4) NOT NULL AUTO_INCREMENT,
+  `Particiapation` tinyint(1) DEFAULT NULL,
+  `encadrer` tinyint(1) DEFAULT NULL,
+  `CNILFRR` tinyint(1) DEFAULT NULL,
+  `sortie` tinyint(1) DEFAULT NULL,
+  `signature` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idAutorisation`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -140,27 +130,16 @@ INSERT INTO `categorie` (`idCat`, `nomCat`, `idResp`, `idEntrn`, `prix`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `dirigeant`
+-- Structure de la table `charte`
 --
 
-DROP TABLE IF EXISTS `dirigeant`;
-CREATE TABLE IF NOT EXISTS `dirigeant` (
-  `idDirigeant` int(2) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(40) COLLATE utf8_bin NOT NULL,
-  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
-  `mdp` varchar(35) COLLATE utf8_bin NOT NULL,
-  `mail` varchar(255) COLLATE utf8_bin NOT NULL,
-  `telPortable` char(10) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`idDirigeant`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Déchargement des données de la table `dirigeant`
---
-
-INSERT INTO `dirigeant` (`idDirigeant`, `nom`, `prenom`, `mdp`, `mail`, `telPortable`) VALUES
-(1, 'Guirassy', 'Fatou', '0000', 'fg@hotmail.com', '0678987899'),
-(2, 'theveu', 'ronan', '7343ee13f38e6228eafc531156fddce9', 'ronantheveu@gmail.com', '0651633085');
+DROP TABLE IF EXISTS `charte`;
+CREATE TABLE IF NOT EXISTS `charte` (
+  `idCharte` int(4) NOT NULL AUTO_INCREMENT,
+  `lieu` varchar(50) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`idCharte`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -176,36 +155,38 @@ CREATE TABLE IF NOT EXISTS `entrainements` (
   `fin` char(5) COLLATE utf8_bin NOT NULL,
   `idTerrain` int(2) NOT NULL,
   `idCat` varchar(5) COLLATE utf8_bin NOT NULL,
+  `idEntrn` int(2) DEFAULT NULL,
   PRIMARY KEY (`idEntrainement`),
   KEY `fk_terrains` (`idTerrain`),
-  KEY `fk_categories` (`idCat`)
+  KEY `fk_categories` (`idCat`),
+  KEY `idEntrn` (`idEntrn`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `entrainements`
 --
 
-INSERT INTO `entrainements` (`idEntrainement`, `jours`, `debut`, `fin`, `idTerrain`, `idCat`) VALUES
-(1, 'Mercredi', '15h00', '16h15', 1, 'U6'),
-(2, 'Mercredi', '15h00', '16h30', 1, 'U8'),
-(3, 'Mercredi', '16h00', '17h30', 1, 'U10'),
-(4, 'Mercredi', '17h00', '18h30', 1, 'U12'),
-(5, 'Mercredi', '18h00', '19h30', 2, 'U14'),
-(6, 'Vendredi', '18h00', '19h30', 1, 'U14'),
-(7, 'Mardi', '19h00', '20h30', 1, 'U16'),
-(8, 'Vendredi', '18h00', '20h00', 4, 'U16'),
-(9, 'Mercredi', '19h00', '20h30', 1, 'U18'),
-(10, 'Vendredi', '19h30', '21h00', 4, 'U18'),
-(11, 'Mardi', '20h00', '22h00', 1, 'U20'),
-(12, 'Jeudi', '20h00', '22h00', 2, 'U20'),
-(13, 'Mardi', '19h00', '20h30', 1, 'U19'),
-(14, 'Vendredi', '19h00', '20h30', 4, 'U19'),
-(15, 'Mercredi', '19h00', '20h30', 1, 'U20F'),
-(16, 'Mercredi', '19h30', '21h00', 4, 'U20F'),
-(17, 'Samedi', '10h00', '12h00', 2, 'RA'),
-(18, 'Lundi', '19h15', '20h00', 1, 'RL'),
-(19, 'Mardi', '11h45', '12h45', 5, 'RC'),
-(20, 'Samedi', '10h00', '11h00', 2, 'RC');
+INSERT INTO `entrainements` (`idEntrainement`, `jours`, `debut`, `fin`, `idTerrain`, `idCat`, `idEntrn`) VALUES
+(1, 'Mercredi', '15h00', '16h15', 1, 'U6', NULL),
+(2, 'Mercredi', '15h00', '16h30', 1, 'U8', NULL),
+(3, 'Mercredi', '16h00', '17h30', 1, 'U10', NULL),
+(4, 'Mercredi', '17h00', '18h30', 1, 'U12', NULL),
+(5, 'Mercredi', '18h00', '19h30', 2, 'U14', NULL),
+(6, 'Vendredi', '18h00', '19h30', 1, 'U14', NULL),
+(7, 'Mardi', '19h00', '20h30', 1, 'U16', NULL),
+(8, 'Vendredi', '18h00', '20h00', 4, 'U16', NULL),
+(9, 'Mercredi', '19h00', '20h30', 1, 'U18', NULL),
+(10, 'Vendredi', '19h30', '21h00', 4, 'U18', NULL),
+(11, 'Mardi', '20h00', '22h00', 1, 'U20', NULL),
+(12, 'Jeudi', '20h00', '22h00', 2, 'U20', NULL),
+(13, 'Mardi', '19h00', '20h30', 1, 'U19', NULL),
+(14, 'Vendredi', '19h00', '20h30', 4, 'U19', NULL),
+(15, 'Mercredi', '19h00', '20h30', 1, 'U20F', NULL),
+(16, 'Mercredi', '19h30', '21h00', 4, 'U20F', NULL),
+(17, 'Samedi', '10h00', '12h00', 2, 'RA', NULL),
+(18, 'Lundi', '19h15', '20h00', 1, 'RL', NULL),
+(19, 'Mardi', '11h45', '12h45', 5, 'RC', NULL),
+(20, 'Samedi', '10h00', '11h00', 2, 'RC', NULL);
 
 -- --------------------------------------------------------
 
@@ -220,21 +201,92 @@ CREATE TABLE IF NOT EXISTS `entraineurs` (
   `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
   `mail` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `telephone` char(10) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`idEntrn`)
+  `idEntrainement` int(2) DEFAULT NULL,
+  `mdp` varchar(128) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`idEntrn`),
+  KEY `idEntrainement` (`idEntrainement`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `entraineurs`
 --
 
-INSERT INTO `entraineurs` (`idEntrn`, `nom`, `prenom`, `mail`, `telephone`) VALUES
-(1, 'Leroux', 'Julian', 'julianleroux94@hotmail.fr', '0671084257'),
-(2, 'Le Guillou', 'Loic', '', '0618556106'),
-(3, ' Lefranc', 'Anthony', 'antho_94800@hotmail.fr', '0668130287'),
-(4, 'Boukeroui', 'Yanis', 'boukeroui.yanis@gmail.com', '0677616963'),
-(5, 'Forstmann', 'Nicolas', 'nico.forstmann@hotmail.fr', '0635337747'),
-(6, 'Reby', 'Fabrice', '', '0630084489'),
-(7, 'Louis', 'Fabrice', '', '0609647753');
+INSERT INTO `entraineurs` (`idEntrn`, `nom`, `prenom`, `mail`, `telephone`, `idEntrainement`, `mdp`) VALUES
+(1, 'Leroux', 'Julian', 'julianleroux94@hotmail.fr', '0671084257', NULL, '0'),
+(2, 'Le Guillou', 'Loic', '', '0618556106', NULL, '0'),
+(3, ' Lefranc', 'Anthony', 'antho_94800@hotmail.fr', '0668130287', NULL, '0'),
+(4, 'Boukeroui', 'Yanis', 'boukeroui.yanis@gmail.com', '0677616963', NULL, '0'),
+(5, 'Forstmann', 'Nicolas', 'nico.forstmann@hotmail.fr', '0635337747', NULL, '0'),
+(6, 'Reby', 'Fabrice', '', '0630084489', NULL, '0'),
+(7, 'Louis', 'Fabrice', '', '0609647753', NULL, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `manager`
+--
+
+DROP TABLE IF EXISTS `manager`;
+CREATE TABLE IF NOT EXISTS `manager` (
+  `idManager` int(2) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
+  `mdp` varchar(128) COLLATE utf8_bin NOT NULL,
+  `mail` varchar(255) COLLATE utf8_bin NOT NULL,
+  `telPortable` char(14) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`idManager`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `manager`
+--
+
+INSERT INTO `manager` (`idManager`, `nom`, `prenom`, `mdp`, `mail`, `telPortable`) VALUES
+(1, 'Guirassy', 'Fatou', '0000', 'fg@hotmail.com', '0678987899'),
+(2, 'theveu', 'ronan', '7343ee13f38e6228eafc531156fddce9', 'ronantheveu@gmail.com', '0651633085'),
+(3, 'dqzd', 'zqdqdz', 'aaaa', 'dqd@gmail.com', '05 02 03 06 05'),
+(4, 'dzqd', 'dqzd', '1b86355f13a7f0b90c8b6053c0254399994dfbb3843e08d603e292ca13b8f672ed5e58791c10f3e36daec9699cc2fbdc88b4fe116efa7fce016938b787043818', 'dq@gmail.com', '05 02 03 06 06'),
+(5, 'da', 'daad', '6c89030400dbcd6561f8e03c8ccbeff4d8150988e635af53a581622da3223e37a64abb3f26a1cff7f0014c32e4ca615e76534fb53830e54c67603b892124c8d1', 'aa@gmail.com', '05 04 05 06 06'),
+(6, 'dqd', 'qddqd', '5e3b118f9e6917361f4a1e222becdf0ba765ba94447ee0065776a596007156bc0e570e6446e6bdf68e33fa182915dd36a155162b29a0f5a40feca462a5985fdd', 'qq@gmail.com', '05 04 02 01 01');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `medecintraitant`
+--
+
+DROP TABLE IF EXISTS `medecintraitant`;
+CREATE TABLE IF NOT EXISTS `medecintraitant` (
+  `idMT` int(3) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(40) DEFAULT NULL,
+  `prenom` varchar(40) DEFAULT NULL,
+  `adresse` varchar(100) DEFAULT NULL,
+  `tel` char(14) DEFAULT NULL,
+  PRIMARY KEY (`idMT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mere`
+--
+
+DROP TABLE IF EXISTS `mere`;
+CREATE TABLE IF NOT EXISTS `mere` (
+  `idMere` int(4) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(40) DEFAULT NULL,
+  `prenom` varchar(40) DEFAULT NULL,
+  `mail` varchar(255) DEFAULT NULL,
+  `mdp` varchar(128) DEFAULT NULL,
+  `profession` varchar(30) DEFAULT NULL,
+  `adresse` varchar(100) DEFAULT NULL,
+  `ville` varchar(40) DEFAULT NULL,
+  `cp` char(5) DEFAULT NULL,
+  `telPortable` char(14) DEFAULT NULL,
+  `telDomicile` char(14) DEFAULT NULL,
+  `entreprise` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idMere`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -255,11 +307,24 @@ CREATE TABLE IF NOT EXISTS `message` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `parents`
+-- Structure de la table `partenaire`
 --
 
-DROP TABLE IF EXISTS `parents`;
-CREATE TABLE IF NOT EXISTS `parents` (
+DROP TABLE IF EXISTS `partenaire`;
+CREATE TABLE IF NOT EXISTS `partenaire` (
+  `idPartenaire` int(2) NOT NULL AUTO_INCREMENT,
+  `logo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idPartenaire`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pere`
+--
+
+DROP TABLE IF EXISTS `pere`;
+CREATE TABLE IF NOT EXISTS `pere` (
   `idParent` int(5) NOT NULL AUTO_INCREMENT,
   `nom` varchar(40) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
@@ -270,25 +335,42 @@ CREATE TABLE IF NOT EXISTS `parents` (
   `telPortable` char(14) COLLATE utf8_bin NOT NULL,
   `telDomicile` char(14) COLLATE utf8_bin NOT NULL,
   `mail` char(255) COLLATE utf8_bin NOT NULL,
-  `lienParente` varchar(15) COLLATE utf8_bin NOT NULL,
-  `pieceIdentiteP` longblob,
+  `mdp` varchar(128) COLLATE utf8_bin NOT NULL,
+  `entreprise` varchar(30) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idParent`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Déchargement des données de la table `parents`
+-- Déchargement des données de la table `pere`
 --
 
-INSERT INTO `parents` (`idParent`, `nom`, `prenom`, `adresse`, `profession`, `ville`, `cp`, `telPortable`, `telDomicile`, `mail`, `lienParente`, `pieceIdentiteP`) VALUES
-(1, 'guirassy', 'fgbgfb', 'dxfgsfgh', 'trsghsrtg', 'ertsr', '75007', '0745434555', '', 'fagsn@jnn.fr', '', ''),
-(2, 'cvgvh', 'bis', 'jugvfc', 'ratp', 'paris', '94500', '0745434566', '', 'mnhbvg@jhb.fr', 'mere', ''),
-(3, 'cvgvh', 'bis', 'jugvfc', 'ratp', 'paris', '94500', '0745434566', '', 'mnhbvg@jhb.fr', 'pere', ''),
-(4, 'hjdvc', 'sdfszge', '65 Boulevard Victor', 'bgcf', 'Paris 15e Arrondissement', '75015', '0790909090', '', 'jzshg@htmail.com', 'soeur', ''),
-(5, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '', 'sad@jhsd.fr', 'frere', ''),
-(6, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '', 'sad@jhsd.fr', 'bpere', ''),
-(7, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '8687876', 'sad@jhsd.fr', 'bpere', ''),
-(8, '', '', '', '', '', '', '', '', '', '', ''),
-(9, 'dqzdqz', 'dqzdqq', 'dqd', 'sff', 'dzqad', '45455', '04 05 02 06 03', '04 02 06 08 09', 'dqsdq@gmail.com', 'père', NULL);
+INSERT INTO `pere` (`idParent`, `nom`, `prenom`, `adresse`, `profession`, `ville`, `cp`, `telPortable`, `telDomicile`, `mail`, `mdp`, `entreprise`) VALUES
+(1, 'guirassy', 'fgbgfb', 'dxfgsfgh', 'trsghsrtg', 'ertsr', '75007', '0745434555', '', 'fagsn@jnn.fr', '', NULL),
+(2, 'cvgvh', 'bis', 'jugvfc', 'ratp', 'paris', '94500', '0745434566', '', 'mnhbvg@jhb.fr', '', NULL),
+(3, 'cvgvh', 'bis', 'jugvfc', 'ratp', 'paris', '94500', '0745434566', '', 'mnhbvg@jhb.fr', '', NULL),
+(4, 'hjdvc', 'sdfszge', '65 Boulevard Victor', 'bgcf', 'Paris 15e Arrondissement', '75015', '0790909090', '', 'jzshg@htmail.com', '', NULL),
+(5, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '', 'sad@jhsd.fr', '', NULL),
+(6, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '', 'sad@jhsd.fr', '', NULL),
+(7, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '8687876', 'sad@jhsd.fr', '', NULL),
+(8, '', '', '', '', '', '', '', '', '', '', NULL),
+(9, 'dqzdqz', 'dqzdqq', 'dqd', 'sff', 'dzqad', '45455', '04 05 02 06 03', '04 02 06 08 09', 'dqsdq@gmail.com', '', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `personnecontact`
+--
+
+DROP TABLE IF EXISTS `personnecontact`;
+CREATE TABLE IF NOT EXISTS `personnecontact` (
+  `idPC` int(4) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(40) DEFAULT NULL,
+  `prenom` varchar(40) DEFAULT NULL,
+  `qualité` varchar(30) DEFAULT NULL,
+  `telPortable` char(14) DEFAULT NULL,
+  `telDomicile` char(14) DEFAULT NULL,
+  PRIMARY KEY (`idPC`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -331,7 +413,6 @@ CREATE TABLE IF NOT EXISTS `terrains` (
   `ville` varchar(30) COLLATE utf8_bin NOT NULL,
   `cp` char(5) COLLATE utf8_bin NOT NULL,
   `adresse` varchar(80) COLLATE utf8_bin NOT NULL,
-  `transport` varchar(100) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idTerrain`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -339,12 +420,12 @@ CREATE TABLE IF NOT EXISTS `terrains` (
 -- Déchargement des données de la table `terrains`
 --
 
-INSERT INTO `terrains` (`idTerrain`, `nomTerrain`, `ville`, `cp`, `adresse`, `transport`) VALUES
-(1, 'Stade Guy Boniface - Villejuif', '', '', '', ''),
-(2, 'Stade de L\'Hayette - L\'Haÿ les Roses', '', '', '', ''),
-(3, 'Stade Evelyne Gérard', '', '', '', ''),
-(4, 'Stade Alfan Port Talbot', '', '', '', ''),
-(5, 'Pelouse Parc des Hautes Bruyères', '', '', '', '');
+INSERT INTO `terrains` (`idTerrain`, `nomTerrain`, `ville`, `cp`, `adresse`) VALUES
+(1, 'Stade Guy Boniface - Villejuif', '', '', ''),
+(2, 'Stade de L\'Hayette - L\'Haÿ les Roses', '', '', ''),
+(3, 'Stade Evelyne Gérard', '', '', ''),
+(4, 'Stade Alfan Port Talbot', '', '', ''),
+(5, 'Pelouse Parc des Hautes Bruyères', '', '', '');
 
 --
 -- Contraintes pour les tables déchargées
@@ -355,7 +436,11 @@ INSERT INTO `terrains` (`idTerrain`, `nomTerrain`, `ville`, `cp`, `adresse`, `tr
 --
 ALTER TABLE `adherents`
   ADD CONSTRAINT `adherents_ibfk_1` FOREIGN KEY (`idCat`) REFERENCES `categorie` (`idCat`),
-  ADD CONSTRAINT `fk_idParent` FOREIGN KEY (`idP`) REFERENCES `parents` (`idParent`);
+  ADD CONSTRAINT `adherents_ibfk_2` FOREIGN KEY (`idAutorisation`) REFERENCES `autorisation` (`idAutorisation`),
+  ADD CONSTRAINT `adherents_ibfk_3` FOREIGN KEY (`idPC`) REFERENCES `personnecontact` (`idPC`),
+  ADD CONSTRAINT `adherents_ibfk_4` FOREIGN KEY (`idCharte`) REFERENCES `charte` (`idCharte`),
+  ADD CONSTRAINT `adherents_ibfk_5` FOREIGN KEY (`idMT`) REFERENCES `medecintraitant` (`idMT`),
+  ADD CONSTRAINT `fk_idParent` FOREIGN KEY (`idP`) REFERENCES `pere` (`idParent`);
 
 --
 -- Contraintes pour la table `categorie`
@@ -368,9 +453,16 @@ ALTER TABLE `categorie`
 -- Contraintes pour la table `entrainements`
 --
 ALTER TABLE `entrainements`
+  ADD CONSTRAINT `entrainements_ibfk_1` FOREIGN KEY (`idEntrn`) REFERENCES `entraineurs` (`idEntrn`),
   ADD CONSTRAINT `fk_categories` FOREIGN KEY (`idCat`) REFERENCES `categorie` (`idCat`),
   ADD CONSTRAINT `fk_terrain` FOREIGN KEY (`idTerrain`) REFERENCES `terrains` (`idTerrain`),
   ADD CONSTRAINT `fk_terrains` FOREIGN KEY (`idTerrain`) REFERENCES `terrains` (`idTerrain`);
+
+--
+-- Contraintes pour la table `entraineurs`
+--
+ALTER TABLE `entraineurs`
+  ADD CONSTRAINT `entraineurs_ibfk_1` FOREIGN KEY (`idEntrainement`) REFERENCES `entrainements` (`idEntrainement`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
