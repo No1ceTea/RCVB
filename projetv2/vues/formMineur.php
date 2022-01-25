@@ -1,6 +1,6 @@
 <?php
   session_start(); 
-  include('connexionDB.php'); 
+  include('../modele/connexionDB.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,7 +14,7 @@
     
   <!-- pour l'enfant -->
   <div>Inscription de l'enfant</div>
-    <form method="post" action="inscription.php" enctype="multipart/form-data">
+    <form method="post" action="../controller/inscription.php" enctype="multipart/form-data">
         <input type="text" placeholder="Votre nom" name="nom" required>
         <input type="text" placeholder="Votre prenom" name="prenom" required> 
         <input type="date" placeholder="Votre date de naissance" name="dateNaissance" required>
@@ -32,7 +32,7 @@
         <input type="file" name="photo" required>
 
     <!-- pour les parents -->
-    
+    <br><br>
     <div>Inscription du père</div>
     <input type="text" placeholder="Votre nom" name="nomPere" required>
     <input type="text" placeholder="Votre prenom" name="prenomPere" required> 
@@ -45,7 +45,7 @@
     <input type="email" placeholder="Adresse mail" name="mailPere" required>
     <input type="password" placeholder="Votre mot de passe" name="mdpPere" required> 
 
-
+    <br><br>
     <div>Inscription de la mère</div>
     <input type="text" placeholder="Votre nom" name="nomMere" required>
     <input type="text" placeholder="Votre prenom" name="prenomMere" required> 
@@ -59,7 +59,7 @@
     <input type="password" placeholder="Votre mot de passe" name="mdpMere" required> 
 
     <!-- pour les autorisations -->
-
+    <br><br>
     <label>Participation à la vie du club</label>
     <input type="radio" name="participation" value="1" required> OUI
     <input type="radio" name="participation" value="0" required> NON
@@ -77,25 +77,32 @@
     <input type="radio" name="image" value="0" required> NON
 
     <!-- pour la charte -->
-
+    <br><br>
     <input type="text" placeholder="lieuCharte" name="lieu" required>
     <label>date du jour</label>
     <input type="date" name="dateCharte" required> 
 
     <!-- pour l'autorisation de soin -->
-
-    <input type="text" placeholder="lieu" name="lieuSoin" required>
+    <br><br>
+    <input type="text" placeholder="lieuSoin" name="lieuSoin" required>
     <label>date du jour</label>
     <input type="date" name="dateSoin" required> 
 
     <!-- pour le medecin traitant -->
-
+    <br><br>
     <input type="text" placeholder="Votre nom" name="nom" required>
     <input type="text" placeholder="Votre prenom" name="prenom" required> 
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortable" required> 
     <input type="adresse" placeholder="Adresse" name="adresse" required>
 
     <!-- pour la personne à contacter -->
+    <br><br>
+    <input type="text" placeholder="Votre nom" name="nom" required>
+    <input type="text" placeholder="Votre prenom" name="prenom" required> 
+    <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableContact" required>
+    <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileContact" required> 
+    <input type="text" placeholder="Adresse" name="adresse" required>
+
 
 
 

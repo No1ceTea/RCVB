@@ -4,7 +4,7 @@
  
     // S'il y a une session alors on ne retourne plus sur cette page  
     if (isset($_SESSION['id'])){
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit;
     }
     
@@ -26,7 +26,7 @@
             // Si on a pas de résultat alors c'est qu'il n'y a pas d'utilisateur correspondant au couple mail / mot de passe
             if ($req['idManager'] == ""){
                 $valid = false;
-                header('Location: formConnexion.php');
+                header('Location: ../vues/formConnexion.php');
             }
         
         
@@ -37,7 +37,7 @@
                 $_SESSION['prenom'] = $req['prenom'];
                 $_SESSION['mail'] = $req['mail'];
         
-                header('Location: index.php');
+                header('Location: ../index.php');
                 exit;
             }
         }

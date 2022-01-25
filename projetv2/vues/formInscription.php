@@ -1,6 +1,6 @@
 <?php
   session_start(); 
-  include('connexionDB.php'); 
+  include('../modele/connexionDB.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,10 +17,10 @@
   }
   if(isset($_POST["rep"])){
     if($_POST["rep"]=="1"){
-      header('Location: formAdherent.php');
+      header('Location: formMajeur.php');
     }
     elseif($_POST["rep"]=="0"){
-      header('Location: formParent.php');
+      header('Location: formMineur.php');
     }
   }
 

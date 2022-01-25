@@ -1,6 +1,6 @@
 <?php
   session_start(); 
-  include('connexionDB.php'); 
+  include('../modele/connexionDB.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,7 +14,7 @@
     
   <!-- pour l'enfant -->
   <div>Inscription de l'adhérent</div>
-    <form method="post" action="inscription.php" enctype="multipart/form-data">
+    <form method="post" action="../controller/inscription.php" enctype="multipart/form-data">
         <input type="text" placeholder="Votre nom" name="nom" required>
         <input type="text" placeholder="Votre prenom" name="prenom" required>
         <input type="email" placeholder="Adresse mail" name="mailAdherent" required>
@@ -81,7 +81,7 @@
 
 
 
-        <button type="submit" name="inscriptionMineur">Envoyer</button>
+        <button type="submit" name="inscriptionMajeur">Envoyer</button>
     </form>
   </body>
 </html>

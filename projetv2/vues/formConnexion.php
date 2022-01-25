@@ -8,7 +8,7 @@
   </head>
   <body>
     <div>Se connecter</div>
-    <form method="post" action="connexion.php">
+    <form method="post" action="../modele/connexion.php">
       <input type="email" placeholder="Adresse mail" name="mail" value="<?php if(isset($mail)){ echo $mail; }?>" required>
       <input type="password" placeholder="Mot de passe" name="mdp" value="<?php if(isset($mdp)){ echo $mdp; }?>" required>
       <button type="submit" name="connexion">Se connecter</button>

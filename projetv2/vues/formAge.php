@@ -1,6 +1,6 @@
 <?php
   session_start(); 
-  include('connexionDB.php'); 
+  include('../modele/connexionDB.php');
 ?>
 <div>Avez vous plus de 18 ans?</div>
     <form method="post" action="formInscription.php">

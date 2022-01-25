@@ -4,7 +4,7 @@
   session_start(); 
   
   // Fichier PHP contenant la connexion à votre BDD
-  include('connexionDB.php'); 
+  include('modele/connexionDB.php');
 ?>
 
 <!DOCTYPE html>
@@ -19,17 +19,17 @@
   <?php
    if(!isset($_SESSION['id'])){ // Si on ne détecte pas de session alors on verra les liens ci-dessous
   ?>
-   <a href="formInscription.php">Inscription</a> <!-- Liens de nos futures pages -->
+   <a href="vues/formInscription.php">Inscription</a> <!-- Liens de nos futures pages -->
    <?php 
    $_SESSION["form"]="age";
    ?>
-   <a href="formConnexion.php">Connexion</a>
+   <a href="vues/formConnexion.php">Connexion</a>
   <?php
     }else{ // Sinon s'il y a une session alors on verra les liens ci-dessous
   ?>
    <a href="profil.php">Mon profil</a>
    <a href="modifier-profil.php">Modifier mon profil</a>
-   <a href="deconnexion.php">Déconnexion</a>
+   <a href="modele/deconnexion.php">Déconnexion</a>
   <?php
    }
   ?>
