@@ -75,7 +75,7 @@
                 exit;
             }
         }
-        if (isset($_POST['inscriptionParent'])){
+        if (isset($_POST['inscriptionPere'])){
             $nom = (trim($nom));
             $prenom = (trim($prenom));
             $mail = (trim($mail));
@@ -90,13 +90,65 @@
 
 
                 // On insert nos données dans la table utilisateur
-                $DB->insert("INSERT INTO parents ( nom, prenom, adresse, ville, cp, telPortable, telDomicile, mail, profession, lienParente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                $DB->insert("INSERT INTO pere ( nom, prenom, adresse, ville, cp, telPortable, telDomicile, mail, profession, lienParente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     array($nom, $prenom, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $profession, $lienParente));
                 
                 header('Location: index.php');
                 exit;
 
 
+
+            }
+        }
+        
+
+        if (isset($_POST['inscriptionMere'])){
+            $nom = (trim($nom));
+            $prenom = (trim($prenom));
+            $mail = (trim($mail));
+            $profession = (trim($profession));
+            $adresse = (trim($adresse));
+            $ville = (trim($ville));
+            $lienParente = (trim($lienParente));
+    
+    
+            // Si toutes les conditions sont remplies alors on fait le traitement
+            if($valid){
+    
+    
+                // On insert nos données dans la table utilisateur
+                $DB->insert("INSERT INTO pere ( nom, prenom, adresse, ville, cp, telPortable, telDomicile, mail, profession, lienParente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    array($nom, $prenom, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $profession, $lienParente));
+                    
+                header('Location: index.php');
+                exit;
+    
+    
+    
+            }
+        }
+
+
+
+        
+        if (isset($_POST['inscriptionManager'])){
+                $nom = (trim($nom));
+                $prenom = (trim($prenom));
+                $mail = (trim($mail));
+                $mdp = (hash('sha512', $mdp));
+    
+    
+            // Si toutes les conditions sont remplies alors on fait le traitement
+            if($valid){
+    
+    
+                // On insert nos données dans la table utilisateur
+                $DB->insert("INSERT INTO manager (nom, prenom, mdp, mail, telPortable) VALUES (?, ?, ?, ?, ?)",
+                    array($nom, $prenom, $mdp, $mail, $telPortable));
+                    
+                header('Location: index.php');
+                exit;
+    
 
             }
         }
