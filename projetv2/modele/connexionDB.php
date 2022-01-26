@@ -25,11 +25,13 @@
       }
     }
     
+
     public function query($sql, $data = array()){
       $req = $this->connexion->prepare($sql);
       $req->execute($data);
       return $req;
     }
+
     
     public function insert($sql, $data = array()){
       $req = $this->connexion->prepare($sql);

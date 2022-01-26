@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 20 jan. 2022 à 15:56
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Généré le : mer. 26 jan. 2022 à 15:39
+-- Version du serveur : 5.7.36
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,23 +55,26 @@ CREATE TABLE IF NOT EXISTS `adherents` (
   `cp` char(5) COLLATE utf8_bin NOT NULL,
   `telPortable` char(14) COLLATE utf8_bin NOT NULL,
   `telDomicile` char(14) COLLATE utf8_bin NOT NULL,
-  `mail` varchar(255) COLLATE utf8_bin NOT NULL,
+  `mail` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `mdp` char(128) COLLATE utf8_bin DEFAULT NULL,
   `nationalite` varchar(30) COLLATE utf8_bin NOT NULL,
   `numSS` char(15) COLLATE utf8_bin NOT NULL,
-  `idP` int(5) DEFAULT NULL,
+  `idPere` int(4) DEFAULT NULL,
   `idCat` varchar(4) COLLATE utf8_bin DEFAULT NULL,
-  `idAutorisation` int(4) NOT NULL,
+  `idAutorisation` int(4) DEFAULT NULL,
   `idPC` int(4) DEFAULT NULL,
   `idCharte` int(4) DEFAULT NULL,
   `idMT` int(3) DEFAULT NULL,
+  `idMere` int(4) DEFAULT NULL,
   PRIMARY KEY (`idAdh`),
-  KEY `fk_idParent` (`idP`),
+  KEY `idPere` (`idPere`),
   KEY `idCat` (`idCat`),
   KEY `idAutorisation` (`idAutorisation`),
   KEY `idPC` (`idPC`),
   KEY `idCharte` (`idCharte`),
-  KEY `idMT` (`idMT`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `idMT` (`idMT`),
+  KEY `idMere` (`idMere`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -82,13 +85,18 @@ CREATE TABLE IF NOT EXISTS `adherents` (
 DROP TABLE IF EXISTS `autorisation`;
 CREATE TABLE IF NOT EXISTS `autorisation` (
   `idAutorisation` int(4) NOT NULL AUTO_INCREMENT,
-  `Particiapation` tinyint(1) DEFAULT NULL,
-  `encadrer` tinyint(1) DEFAULT NULL,
-  `CNILFRR` tinyint(1) DEFAULT NULL,
-  `sortie` tinyint(1) DEFAULT NULL,
-  `signature` tinyint(1) DEFAULT NULL,
+  `participation` tinyint(1) NOT NULL,
+  `encadrer` tinyint(1) NOT NULL,
+  `CNILFRR` tinyint(1) NOT NULL,
+  `sortie` tinyint(1) NOT NULL,
+  `image` tinyint(1) NOT NULL,
   PRIMARY KEY (`idAutorisation`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `autorisation`
+--
+
 
 -- --------------------------------------------------------
 
@@ -139,7 +147,12 @@ CREATE TABLE IF NOT EXISTS `charte` (
   `lieu` varchar(50) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`idCharte`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `charte`
+--
+
 
 -- --------------------------------------------------------
 
@@ -261,9 +274,14 @@ CREATE TABLE IF NOT EXISTS `medecintraitant` (
   `nom` varchar(40) DEFAULT NULL,
   `prenom` varchar(40) DEFAULT NULL,
   `adresse` varchar(100) DEFAULT NULL,
-  `tel` char(14) DEFAULT NULL,
+  `tel` char(14) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idMT`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `medecintraitant`
+--
+
 
 -- --------------------------------------------------------
 
@@ -286,7 +304,11 @@ CREATE TABLE IF NOT EXISTS `mere` (
   `telDomicile` char(14) DEFAULT NULL,
   `entreprise` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idMere`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `mere`
+--
 
 -- --------------------------------------------------------
 
@@ -325,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `partenaire` (
 
 DROP TABLE IF EXISTS `pere`;
 CREATE TABLE IF NOT EXISTS `pere` (
-  `idParent` int(5) NOT NULL AUTO_INCREMENT,
+  `idPere` int(4) NOT NULL AUTO_INCREMENT,
   `nom` varchar(40) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
   `adresse` varchar(80) COLLATE utf8_bin NOT NULL,
@@ -337,23 +359,12 @@ CREATE TABLE IF NOT EXISTS `pere` (
   `mail` char(255) COLLATE utf8_bin NOT NULL,
   `mdp` varchar(128) COLLATE utf8_bin NOT NULL,
   `entreprise` varchar(30) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`idParent`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  PRIMARY KEY (`idPere`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `pere`
 --
-
-INSERT INTO `pere` (`idParent`, `nom`, `prenom`, `adresse`, `profession`, `ville`, `cp`, `telPortable`, `telDomicile`, `mail`, `mdp`, `entreprise`) VALUES
-(1, 'guirassy', 'fgbgfb', 'dxfgsfgh', 'trsghsrtg', 'ertsr', '75007', '0745434555', '', 'fagsn@jnn.fr', '', NULL),
-(2, 'cvgvh', 'bis', 'jugvfc', 'ratp', 'paris', '94500', '0745434566', '', 'mnhbvg@jhb.fr', '', NULL),
-(3, 'cvgvh', 'bis', 'jugvfc', 'ratp', 'paris', '94500', '0745434566', '', 'mnhbvg@jhb.fr', '', NULL),
-(4, 'hjdvc', 'sdfszge', '65 Boulevard Victor', 'bgcf', 'Paris 15e Arrondissement', '75015', '0790909090', '', 'jzshg@htmail.com', '', NULL),
-(5, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '', 'sad@jhsd.fr', '', NULL),
-(6, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '', 'sad@jhsd.fr', '', NULL),
-(7, 'hgfc', 'jmbhv', 'jhv hv', 'nbsdc', 'paris', '75009', '0702983899', '8687876', 'sad@jhsd.fr', '', NULL),
-(8, '', '', '', '', '', '', '', '', '', '', NULL),
-(9, 'dqzdqz', 'dqzdqq', 'dqd', 'sff', 'dzqad', '45455', '04 05 02 06 03', '04 02 06 08 09', 'dqsdq@gmail.com', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -366,11 +377,15 @@ CREATE TABLE IF NOT EXISTS `personnecontact` (
   `idPC` int(4) NOT NULL AUTO_INCREMENT,
   `nom` varchar(40) DEFAULT NULL,
   `prenom` varchar(40) DEFAULT NULL,
-  `qualité` varchar(30) DEFAULT NULL,
+  `qualite` varchar(30) DEFAULT NULL,
   `telPortable` char(14) DEFAULT NULL,
   `telDomicile` char(14) DEFAULT NULL,
   PRIMARY KEY (`idPC`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `personnecontact`
+--
 
 -- --------------------------------------------------------
 
@@ -403,6 +418,27 @@ INSERT INTO `responsable` (`idResp`, `nom`, `prenom`, `mail`, `telephone`, `post
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `soin`
+--
+
+DROP TABLE IF EXISTS `soin`;
+CREATE TABLE IF NOT EXISTS `soin` (
+  `idSoin` int(4) NOT NULL AUTO_INCREMENT,
+  `lieuSoin` varchar(40) DEFAULT NULL,
+  `dateSoin` date DEFAULT NULL,
+  `nom` varchar(30) DEFAULT NULL,
+  `prenom` varchar(30) DEFAULT NULL,
+  `qualite` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idSoin`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `soin`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `terrains`
 --
 
@@ -422,10 +458,10 @@ CREATE TABLE IF NOT EXISTS `terrains` (
 
 INSERT INTO `terrains` (`idTerrain`, `nomTerrain`, `ville`, `cp`, `adresse`) VALUES
 (1, 'Stade Guy Boniface - Villejuif', '', '', ''),
-(2, 'Stade de L\'Hayette - L\'Haÿ les Roses', '', '', ''),
-(3, 'Stade Evelyne Gérard', '', '', ''),
+(2, 'Stade de L\'Hayette - L\'HaÃ¿ les Roses', '', '', ''),
+(3, 'Stade Evelyne GÃ©rard', '', '', ''),
 (4, 'Stade Alfan Port Talbot', '', '', ''),
-(5, 'Pelouse Parc des Hautes Bruyères', '', '', '');
+(5, 'Pelouse Parc des Hautes BruyÃ¨res', '', '', '');
 
 --
 -- Contraintes pour les tables déchargées
@@ -440,7 +476,8 @@ ALTER TABLE `adherents`
   ADD CONSTRAINT `adherents_ibfk_3` FOREIGN KEY (`idPC`) REFERENCES `personnecontact` (`idPC`),
   ADD CONSTRAINT `adherents_ibfk_4` FOREIGN KEY (`idCharte`) REFERENCES `charte` (`idCharte`),
   ADD CONSTRAINT `adherents_ibfk_5` FOREIGN KEY (`idMT`) REFERENCES `medecintraitant` (`idMT`),
-  ADD CONSTRAINT `fk_idParent` FOREIGN KEY (`idP`) REFERENCES `pere` (`idParent`);
+  ADD CONSTRAINT `adherents_ibfk_6` FOREIGN KEY (`idMere`) REFERENCES `mere` (`idMere`),
+  ADD CONSTRAINT `adherents_ibfk_7` FOREIGN KEY (`idPere`) REFERENCES `pere` (`idPere`);
 
 --
 -- Contraintes pour la table `categorie`
