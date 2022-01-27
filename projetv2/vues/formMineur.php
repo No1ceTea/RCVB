@@ -38,6 +38,7 @@
     <input type="text" placeholder="Votre prenom" name="prenomPere" required> 
     <input type="text" placeholder="Votre adresse" name="adressePere" required>
     <input type="text" placeholder="Votre ville" name="villePere" required>
+    <input type="text" placeholder="Votre entreprise" name="entreprisePere" required>
     <input type="text" placeholder="Votre code postale" name="cpPere" pattern="[0-9]{5}" required>
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortablePere" required> 
     <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicilePere" required> 
@@ -51,6 +52,7 @@
     <input type="text" placeholder="Votre prenom" name="prenomMere" required> 
     <input type="text" placeholder="Votre adresse" name="adresseMere" required>
     <input type="text" placeholder="Votre ville" name="villeMere" required>
+    <input type="text" placeholder="Votre entreprise" name="entrepriseMere" required>
     <input type="text" placeholder="Votre code postale" name="cpMere" pattern="[0-9]{5}" required>
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableMere" required> 
     <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileMere" required> 
@@ -58,8 +60,8 @@
     <input type="email" placeholder="Adresse mail" name="mailMere" required>
     <input type="password" placeholder="Votre mot de passe" name="mdpMere" required> 
 
-    <!-- pour les autorisations -->
-    <br><br>
+       <!-- pour les autorisations -->
+       <br><br>
     <label>Participation à la vie du club</label>
     <input type="radio" name="participation" value="1" required> OUI
     <input type="radio" name="participation" value="0" required> NON
@@ -78,7 +80,7 @@
 
     <!-- pour la charte -->
     <br><br>
-    <input type="text" placeholder="lieuCharte" name="lieu" required>
+    <input type="text" placeholder="lieuCharte" name="lieuCharte" required>
     <label>date du jour</label>
     <input type="date" name="dateCharte" required> 
 
@@ -90,19 +92,18 @@
 
     <!-- pour le medecin traitant -->
     <br><br>
-    <input type="text" placeholder="Votre nom" name="nom" required>
-    <input type="text" placeholder="Votre prenom" name="prenom" required> 
-    <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortable" required> 
-    <input type="adresse" placeholder="Adresse" name="adresse" required>
+    <input type="text" placeholder="Votre nom" name="nomMedecin" required>
+    <input type="text" placeholder="Votre prenom" name="prenomMedecin" required> 
+    <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableMedecin" required> 
+    <input type="adresse" placeholder="Adresse" name="adresseMedecin" required>
 
     <!-- pour la personne à contacter -->
     <br><br>
-    <input type="text" placeholder="Votre nom" name="nom" required>
-    <input type="text" placeholder="Votre prenom" name="prenom" required> 
+    <input type="text" placeholder="Votre nom" name="nomContact" required>
+    <input type="text" placeholder="Votre prenom" name="prenomContact" required> 
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableContact" required>
     <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileContact" required> 
-    <input type="text" placeholder="Adresse" name="adresse" required>
-
+    <input type="text" placeholder="qualite" name="qualiteContact" required>
 
 
 

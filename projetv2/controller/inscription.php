@@ -13,15 +13,32 @@
         extract($_POST);
         $valid = true;
     
+
+
+    //INSCRIPTION POUR MAJEUR
+
     // On se place sur le bon formulaire grâce au "name" de la balise "input"
-        if (isset($_POST['inscriptionEnfant'])){
+        if (isset($_POST['inscriptionMajeur'])){
         $nom = (trim($nom));
         $prenom = (trim($prenom));
         $mail = (trim($mail));
+        $mdp = (hash('sha512', $mdp));
         $lieuNaissance = (trim($lieuNaissance));
         $adresse = (trim($adresse));
         $ville = (trim($ville));
         $nationalite = (trim($nationalite));
+        
+        $lieuCharte = (trim($lieuCharte));
+
+        $lieuSoin = (trim($lieuSoin));
+
+        $nomMedecin = (trim($nomMedecin));
+        $prenomMedecin = (trim($prenomMedecin));
+        $adresseMedecin = (trim($adresseMedecin));
+
+        $nomContact = (trim($nomContact));
+        $prenomContact = (trim($prenomContact));
+        $qualiteContact = (trim($qualiteContact));
 
 
         $extensionPhoto=substr($_FILES['photo']['name'],-4,4);    //prendre l'extension du fichier
@@ -34,10 +51,10 @@
         $_FILES['photo']['name']=$nomCompletphoto;
     
 
-        $destinationP="D:/wamp/www/RCVB.V2/projetv2/images/photo/";
-        $destinationI="D:/wamp/www/RCVB.V2/projetv2/images/pieceIdentite/";
-        $accesI="D:/wamp/www/RCVB.V2/projetv2/".$_FILES['pieceIdentite']['name'];
-        $accesP="D:/wamp/www/RCVB.V2/projetv2/".$_FILES['photo']['name'];
+        $destinationP="C:/wamp/www/RCVB.V2/projetv2/images/photo/";
+        $destinationI="C:/wamp/www/RCVB.V2/projetv2/images/pieceIdentite/";
+        $accesI="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['pieceIdentite']['name'];
+        $accesP="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['photo']['name'];
         
 
 
@@ -68,89 +85,215 @@
 
 
                 // On insert nos données dans la table utilisateur
-                $DB->insert("INSERT INTO adherents ( nom, prenom, dateNaiss, lieuNaiss, adresse, ville, cp, telPortable, telDomicile, mail, nationalite, numSS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    array($nom, $prenom, $dateNaissance, $lieuNaissance, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $nationalite, $numSS));
+
+                
+
                 
                 
+                $DB->insert("INSERT INTO autorisation (participation, encadrer, CNILFRR, sortie, image) VALUES(?, ?, ?, ?, ?)",
+                    array($participation, $encadrer, $CNIL, $sortie, $image));
+                    
+                
+                
+                $DB->insert("INSERT INTO charte (lieu, date) VALUES(?, ?)",
+                    array($lieuCharte, $dateCharte));
+            
+                
+                $DB->insert("INSERT INTO soin (lieuSoin, dateSoin) VALUES(?, ?)",
+                array($lieuSoin, $dateSoin));
+
+                
+                $DB->insert("INSERT INTO medecintraitant (nom, prenom, adresse, tel) VALUES(?, ?, ?, ?)",
+                array($nomMedecin, $prenomMedecin, $adresseMedecin, $telPortableMedecin));
+                
+                
+                $DB->insert("INSERT INTO personnecontact (nom, prenom, qualite, telPortable, telDomicile) VALUES(?, ?, ?, ?, ?)",
+                array($nomContact, $prenomContact, $qualiteContact, $telPortableContact, $telDomicileContact));
+
+
+                $personneContact = $DB->query("SELECT idPC from personnecontact order by idPC DESC LIMIT 1");
+                $personneContact=$personneContact->fetch();
+                $personneContact=array_unique($personneContact);
+                $personneContact = implode(" ", $personneContact);
+
+
+                $idAutorisation = $DB->query("SELECT idAutorisation from autorisation order by idAutorisation DESC LIMIT 1");
+                $idAutorisation=$idAutorisation->fetch();
+                $idAutorisation=array_unique($idAutorisation);
+                $idAutorisation = implode(" ", $idAutorisation);
+
+
+                $idCharte = $DB->query("SELECT idCharte from charte order by idCharte DESC LIMIT 1");
+                $idCharte=$idCharte->fetch();
+                $idCharte=array_unique($idCharte);
+                $idCharte = implode(" ", $idCharte);
+
+
+                $idMedecinTraitant = $DB->query("SELECT idMT from medecintraitant order by idMT DESC LIMIT 1");
+                $idMedecinTraitant=$idMedecinTraitant->fetch();
+                $idMedecinTraitant=array_unique($idMedecinTraitant);
+                $idMedecinTraitant = implode(" ", $idMedecinTraitant);
+
+
+
+            
+                $DB->insert("INSERT INTO adherents ( nom, prenom, dateNaiss, lieuNaiss, adresse, ville, cp, telPortable, telDomicile, mail, nationalite, numSS, mdp, idAutorisation, idPC, idCharte, idMT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                array($nom, $prenom, $dateNaissance, $lieuNaissance, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $nationalite, $numSS, $mdp, $idAutorisation, $personneContact, $idCharte, $idMedecinTraitant));
+                
+                header('Location: ../index.php');
                 exit;
+
             }
         }
-        if (isset($_POST['inscriptionPere'])){
+
+
+        //INSCRIPTION POUR MINEUR
+
+        if (isset($_POST['inscriptionMineur'])){
             $nom = (trim($nom));
             $prenom = (trim($prenom));
-            $mail = (trim($mail));
-            $profession = (trim($profession));
+            $lieuNaissance = (trim($lieuNaissance));
             $adresse = (trim($adresse));
             $ville = (trim($ville));
-            $lienParente = (trim($lienParente));
+            $nationalite = (trim($nationalite));
+            
+            $nomPere = (trim($nomPere));
+            $prenomPere = (trim($prenomPere));
+            $mailPere = (trim($mailPere));
+            $professionPere = (trim($professionPere));
+            $adressePere = (trim($adressePere));
+            $villePere = (trim($villePere));
+            $mdpPere = (hash('sha512', $mdpPere));
 
+            $mdpMere = (hash('sha512', $mdpMere));
+            $nomMere = (trim($nomMere));
+            $prenomMere = (trim($prenomMere));
+            $mailMere = (trim($mailMere));
+            $professionMere = (trim($professionMere));
+            $adresseMere = (trim($adresseMere));
+            $villeMere = (trim($villeMere));
 
-            // Si toutes les conditions sont remplies alors on fait le traitement
-            if($valid){
+            $lieuCharte = (trim($lieuCharte));
+    
+            $lieuSoin = (trim($lieuSoin));
+    
+            $nomMedecin = (trim($nomMedecin));
+            $prenomMedecin = (trim($prenomMedecin));
+            $adresseMedecin = (trim($adresseMedecin));
+    
+            $nomContact = (trim($nomContact));
+            $prenomContact = (trim($prenomContact));
+            $qualiteContact = (trim($qualiteContact));
+    
+    
+            $extensionPhoto=substr($_FILES['photo']['name'],-4,4);    //prendre l'extension du fichier
+            $extensionIdentite=substr($_FILES['pieceIdentite']['name'],-4,4); //prendre l'extesion du fichier
+    
+            $nomCompletIdentite="$nom $prenom$extensionIdentite"; //création du nom de fichier avec nom prenom et l'extension d'origine
+            $_FILES['pieceIdentite']['name']=$nomCompletIdentite;
+    
+            $nomCompletphoto="$nom $prenom$extensionPhoto"; //création du nom de fichier avec nom prenom et l'extension d'origine
+            $_FILES['photo']['name']=$nomCompletphoto;
+        
+    
+            $destinationP="C:/wamp/www/RCVB.V2/projetv2/images/photo/";
+            $destinationI="C:/wamp/www/RCVB.V2/projetv2/images/pieceIdentite/";
+            $accesI="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['pieceIdentite']['name'];
+            $accesP="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['photo']['name'];
+            
+    
+    
+    
+            if (isset($_FILES['photo']['tmp_name'])) {
+                $photo = copy($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
+                if($photo) {
+                    $source_file = $accesP;
+                    $destination_path = $destinationP;
+                    rename($source_file, $destination_path . pathinfo($source_file, PATHINFO_BASENAME));
+                }
+            }
+    
+            if (isset($_FILES['pieceIdentite']['tmp_name'])) {
+                $pieceIdentite = copy($_FILES['pieceIdentite']['tmp_name'], $_FILES['pieceIdentite']['name']);
+                if($pieceIdentite) {
+                    $source_file = $accesI;
+                    $destination_path = $destinationI;
+                    rename($source_file, $destination_path . pathinfo($source_file, PATHINFO_BASENAME));
+                }
+            }
+            
+    
+    
+     
+                // Si toutes les conditions sont remplies alors on fait le traitement
+                if($valid){
+    
 
-
-                // On insert nos données dans la table utilisateur
-                $DB->insert("INSERT INTO pere ( nom, prenom, adresse, ville, cp, telPortable, telDomicile, mail, profession, lienParente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    array($nom, $prenom, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $profession, $lienParente));
+                    $DB->insert("INSERT INTO autorisation (participation, encadrer, CNILFRR, sortie, image) VALUES(?, ?, ?, ?, ?)",
+                        array($participation, $encadrer, $CNIL, $sortie, $image));
+                        
+                    
+                    $DB->insert("INSERT INTO charte (lieu, date) VALUES(?, ?)",
+                        array($lieuCharte, $dateCharte));
                 
-                header('Location: index.php');
-                exit;
-
-
-
-            }
-        }
-        
-
-        if (isset($_POST['inscriptionMere'])){
-            $nom = (trim($nom));
-            $prenom = (trim($prenom));
-            $mail = (trim($mail));
-            $profession = (trim($profession));
-            $adresse = (trim($adresse));
-            $ville = (trim($ville));
-            $lienParente = (trim($lienParente));
+                    $DB->insert("INSERT INTO soin (lieuSoin, dateSoin) VALUES(?, ?)",
+                        array($lieuSoin, $dateSoin));
     
-    
-            // Si toutes les conditions sont remplies alors on fait le traitement
-            if($valid){
-    
-    
-                // On insert nos données dans la table utilisateur
-                $DB->insert("INSERT INTO pere ( nom, prenom, adresse, ville, cp, telPortable, telDomicile, mail, profession, lienParente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    array($nom, $prenom, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $profession, $lienParente));
+                    $DB->insert("INSERT INTO medecintraitant (nom, prenom, adresse, tel) VALUES(?, ?, ?, ?)",
+                        array($nomMedecin, $prenomMedecin, $adresseMedecin, $telPortableMedecin));
                     
-                header('Location: index.php');
-                exit;
+                    $DB->insert("INSERT INTO personnecontact (nom, prenom, qualite, telPortable, telDomicile) VALUES(?, ?, ?, ?, ?)",
+                        array($nomContact, $prenomContact, $qualiteContact, $telPortableContact, $telDomicileContact));
     
-    
-    
-            }
-        }
-
-
-
-        
-        if (isset($_POST['inscriptionManager'])){
-                $nom = (trim($nom));
-                $prenom = (trim($prenom));
-                $mail = (trim($mail));
-                $mdp = (hash('sha512', $mdp));
-    
-    
-            // Si toutes les conditions sont remplies alors on fait le traitement
-            if($valid){
-    
-    
-                // On insert nos données dans la table utilisateur
-                $DB->insert("INSERT INTO manager (nom, prenom, mdp, mail, telPortable) VALUES (?, ?, ?, ?, ?)",
-                    array($nom, $prenom, $mdp, $mail, $telPortable));
+                    $DB->insert("INSERT INTO pere (nom, prenom, adresse, profession, ville, cp, telPortable, telDomicile, mail, mdp, entreprise) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        array($nomPere, $prenomPere, $adressePere, $professionPere, $villePere, $cpPere, $telPortablePere, $telDomicilePere, $mailPere, $mdpPere, $entreprisePere));
                     
-                header('Location: index.php');
-                exit;
-    
+                    $DB->insert("INSERT INTO mere (nom, prenom, adresse, profession, ville, cp, telPortable, telDomicile, mail, mdp, entreprise) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        array($nomMere, $prenomMere, $adresseMere, $professionMere, $villeMere, $cpMere, $telPortableMere, $telDomicileMere, $mailMere, $mdpMere, $entrepriseMere));
 
+
+    
+                    $idPersonneContact = $DB->query("SELECT idPC from personnecontact order by idPC DESC LIMIT 1");
+                    $idPersonneContact=$idPersonneContact->fetch();
+                    $idPersonneContact=array_unique($idPersonneContact);
+                    $idPersonneContact = implode(" ", $idPersonneContact);
+    
+    
+                    $idAutorisation = $DB->query("SELECT idAutorisation from autorisation order by idAutorisation DESC LIMIT 1");
+                    $idAutorisation=$idAutorisation->fetch();
+                    $idAutorisation=array_unique($idAutorisation);
+                    $idAutorisation = implode(" ", $idAutorisation);
+    
+    
+                    $idCharte = $DB->query("SELECT idCharte from charte order by idCharte DESC LIMIT 1");
+                    $idCharte=$idCharte->fetch();
+                    $idCharte=array_unique($idCharte);
+                    $idCharte = implode(" ", $idCharte);
+    
+    
+                    $idMedecinTraitant = $DB->query("SELECT idMT from medecintraitant order by idMT DESC LIMIT 1");
+                    $idMedecinTraitant=$idMedecinTraitant->fetch();
+                    $idMedecinTraitant=array_unique($idMedecinTraitant);
+                    $idMedecinTraitant = implode(" ", $idMedecinTraitant);
+                    
+                    $idPere = $DB->query("SELECT idPere from pere order by idPere DESC LIMIT 1");
+                    $idPere=$idPere->fetch();
+                    $idPere=array_unique($idPere);
+                    $idPere = implode(" ", $idPere);
+
+                    $idMere = $DB->query("SELECT idMere from mere order by idMere DESC LIMIT 1");
+                    $idMere=$idMere->fetch();
+                    $idMere=array_unique($idMere);
+                    $idMere = implode(" ", $idMere);
+                
+                    $DB->insert("INSERT INTO adherents ( nom, prenom, dateNaiss, lieuNaiss, adresse, ville, cp, telPortable, telDomicile, nationalite, numSS, idAutorisation, idPC, idCharte, idMT, idMere, idPere) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        array($nom, $prenom, $dateNaissance, $lieuNaissance, $adresse, $ville, $cp, $telPortable, $telDomicile, $nationalite, $numSS, $idAutorisation, $idPersonneContact, $idCharte, $idMedecinTraitant, $idMere, $idPere));
+                
+
+                    header('Location: ../index.php');
+                    exit;
+    
+                }
             }
-        }
     }
 ?>

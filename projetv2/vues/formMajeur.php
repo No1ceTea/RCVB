@@ -17,8 +17,8 @@
     <form method="post" action="../controller/inscription.php" enctype="multipart/form-data">
         <input type="text" placeholder="Votre nom" name="nom" required>
         <input type="text" placeholder="Votre prenom" name="prenom" required>
-        <input type="email" placeholder="Adresse mail" name="mailAdherent" required>
-        <input type="password" placeholder="Votre mot de passe" name="mdpAdherent" required> 
+        <input type="email" placeholder="Adresse mail" name="mail" required>
+        <input type="password" placeholder="Votre mot de passe" name="mdp" required> 
         <input type="date" placeholder="Votre date de naissance" name="dateNaissance" required>
         <input type="text" placeholder="Votre lieu de naissance" name="lieuNaissance" required> 
         <input type="text" placeholder="Votre adresse" name="adresse" required>
@@ -53,7 +53,7 @@
 
     <!-- pour la charte -->
     <br><br>
-    <input type="text" placeholder="lieuCharte" name="lieu" required>
+    <input type="text" placeholder="lieuCharte" name="lieuCharte" required>
     <label>date du jour</label>
     <input type="date" name="dateCharte" required> 
 
@@ -65,18 +65,18 @@
 
     <!-- pour le medecin traitant -->
     <br><br>
-    <input type="text" placeholder="Votre nom" name="nom" required>
-    <input type="text" placeholder="Votre prenom" name="prenom" required> 
-    <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortable" required> 
-    <input type="adresse" placeholder="Adresse" name="adresse" required>
+    <input type="text" placeholder="Votre nom" name="nomMedecin" required>
+    <input type="text" placeholder="Votre prenom" name="prenomMedecin" required> 
+    <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableMedecin" required> 
+    <input type="adresse" placeholder="Adresse" name="adresseMedecin" required>
 
     <!-- pour la personne à contacter -->
     <br><br>
-    <input type="text" placeholder="Votre nom" name="nom" required>
-    <input type="text" placeholder="Votre prenom" name="prenom" required> 
+    <input type="text" placeholder="Votre nom" name="nomContact" required>
+    <input type="text" placeholder="Votre prenom" name="prenomContact" required> 
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableContact" required>
     <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileContact" required> 
-    <input type="text" placeholder="Adresse" name="adresse" required>
+    <input type="text" placeholder="qualite" name="qualiteContact" required>
 
 
 
