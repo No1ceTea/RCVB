@@ -14,32 +14,125 @@
         $valid = true;
     
         if (isset($_POST['connexion'])){
-        $mail = htmlentities(strtolower(trim($mail)));
+        $mail = htmlentities(trim($mail));
         $mdp = trim($mdp);
-
+        $hash = password_hash($mdp, PASSWORD_DEFAULT);
         
-            // On fait une requête pour savoir si le couple mail / mot de passe existe bien car le mail est unique !
-            $req = $DB->query("SELECT * FROM Manager WHERE mail = ? AND mdp = ?",
-                array($mail, hash('sha512', $mdp)));
+        //CONNEXION POUR L'ADHERENT
+        if ($_SESSION['ChoixConnexion']=="adherent"){
+            $req = $DB->query("SELECT * FROM adherents WHERE mail = ? ",
+                array($mail));
             $req = $req->fetch();
+            $valid=password_verify($mdp, $req['mdp']);
         
-            // Si on a pas de résultat alors c'est qu'il n'y a pas d'utilisateur correspondant au couple mail / mot de passe
-            if ($req['idManager'] == ""){
+            // la requete ne retourne rien
+            if ($req['idAdh'] == ""){
                 $valid = false;
                 header('Location: ../vues/formConnexion.php');
             }
         
         
-            // S'il y a un résultat alors on va charger la SESSION de l'utilisateur en utilisateur les variables $_SESSION
+            // la requete retourne le compte
             if ($valid){
-                $_SESSION['id'] = $req['idManager']; // id de l'utilisateur unique pour les requêtes futures
+                $_SESSION['id'] = $req['idAdh'];
+                $_SESSION['nom'] = $req['nom'];
+                $_SESSION['prenom'] = $req['prenom'];
+                $_SESSION['mail'] = $req['mail'];
+                header('Location: ../index.php');
+            }
+            else{
+                header('Location: ../vues/formConnexion.php');
+            }
+        }
+
+
+        //CONNEXION POUR LE ENTRAINEUR
+        if ($_SESSION['ChoixConnexion']=="entraineur"){
+            $req = $DB->query("SELECT * FROM entraineurs WHERE mail = ? ",
+                array($mail));
+            $req = $req->fetch();
+            $valid=password_verify($mdp, $req['mdp']);
+        
+            // la requete ne retourne rien
+            if ($req['idEntrn'] == ""){
+                $valid = false;
+                header('Location: ../vues/formConnexion.php');
+            }
+        
+        
+            // la requete retourne le compte
+            if ($valid){
+                $_SESSION['id'] = $req['idEntrn'];
                 $_SESSION['nom'] = $req['nom'];
                 $_SESSION['prenom'] = $req['prenom'];
                 $_SESSION['mail'] = $req['mail'];
         
                 header('Location: ../index.php');
-                exit;
             }
+            else{
+                header('Location: ../vues/formConnexion.php');
+            }
+        }
+
+        //CONNEXION POUR LE RESPONSABLE
+        if ($_SESSION['ChoixConnexion']=="responsable"){
+            $req = $DB->query("SELECT * FROM responsable WHERE mail = ? ",
+                array($mail));
+            $req = $req->fetch();
+            $valid=password_verify($mdp, $req['mdp']);
+        
+            // la requete ne retourne rien
+            if ($req['idEntrn'] == ""){
+                $valid = false;
+                header('Location: ../vues/formConnexion.php');
+            }
+        
+        
+            // la requete retourne le compte
+            if ($valid){
+                $_SESSION['id'] = $req['idResp'];
+                $_SESSION['nom'] = $req['nom'];
+                $_SESSION['prenom'] = $req['prenom'];
+                $_SESSION['mail'] = $req['mail'];
+        
+                header('Location: ../index.php');
+            }
+            else{
+                header('Location: ../vues/formConnexion.php');
+            }
+        }
+
+
+        //CONNEXION POUR LE MANAGER
+        if ($_SESSION['ChoixConnexion']=="manager"){
+
+            $req = $DB->query("SELECT * FROM manager WHERE mail = ? ",
+                array($mail));
+            $req = $req->fetch();
+
+            $valid=password_verify($mdp, $req['mdp']);
+        
+            // la requete ne retourne rien
+            if ($req['idEntrn'] == ""){
+                $valid = false;
+                header('Location: ../vues/formConnexion.php');
+            }
+        
+        
+            // la requete retourne le compte
+            if ($valid){
+                $_SESSION['id'] = $req['idManager'];
+                $_SESSION['nom'] = $req['nom'];
+                $_SESSION['prenom'] = $req['prenom'];
+                $_SESSION['mail'] = $req['mail'];
+        
+                header('Location: ../index.php');
+            }
+            else{
+                header('Location: ../vues/formConnexion.php');
+            }
+        }
+        echo $_SESSION['ChoixConnexion'];
         }
     }
 ?>

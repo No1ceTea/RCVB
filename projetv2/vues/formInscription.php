@@ -23,17 +23,6 @@
       header('Location: formMineur.php');
     }
   }
-
-
   ?>
-
-
-
-
-
-
-
-
-
   </body>
 </html>

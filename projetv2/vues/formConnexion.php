@@ -1,3 +1,7 @@
+<?php
+  session_start(); 
+  include('../modele/connexionDB.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -14,5 +18,20 @@
       <button type="submit" name="connexion">Se connecter</button>
     </form>
     <a href="formMotdepasseOublie.php">Mot de passe oublié ?</a>
+
+    <?php 
+    if ($_POST["selectConnexion"]=="adherent"){
+      $_SESSION['ChoixConnexion']="adherent";
+    }
+    if ($_POST["selectConnexion"]=="responsable"){
+      $_SESSION['ChoixConnexion']="responsable";
+    }
+    if ($_POST["selectConnexion"]=="entraineur"){
+      $_SESSION['ChoixConnexion']="entraineur";
+    }
+    if ($_POST["selectConnexion"]=="manager"){
+      $_SESSION['ChoixConnexion']="manager";
+    }
+    ?>
   </body>
 </html>

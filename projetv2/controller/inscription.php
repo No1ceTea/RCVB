@@ -1,7 +1,7 @@
 <?php
   session_start();
   include('../modele/connexionDB.php'); // Fichier PHP contenant la connexion à votre BDD
- 
+  include('../modele/conversion.php');
     // S'il y a une session alors on ne retourne plus sur cette page
     if (isset($_SESSION['id'])){
         header('Location: index.php');
@@ -19,26 +19,27 @@
 
     // On se place sur le bon formulaire grâce au "name" de la balise "input"
         if (isset($_POST['inscriptionMajeur'])){
-        $nom = (trim($nom));
-        $prenom = (trim($prenom));
-        $mail = (trim($mail));
-        $mdp = (hash('sha512', $mdp));
-        $lieuNaissance = (trim($lieuNaissance));
-        $adresse = (trim($adresse));
-        $ville = (trim($ville));
-        $nationalite = (trim($nationalite));
+
+        $nom=conversion($nom);
+        $prenom = conversion($prenom);
+        $mail = conversion($mail); 
+        $mdp = password_hash($mdp, PASSWORD_DEFAULT);
+        $lieuNaissance = conversion($lieuNaissance);
+        $adresse = conversion($adresse);
+        $ville = conversion($ville);
+        $nationalite = conversion($nationalite);
         
-        $lieuCharte = (trim($lieuCharte));
+        $lieuCharte = conversion($lieuCharte);
 
-        $lieuSoin = (trim($lieuSoin));
+        $lieuSoin = conversion($lieuSoin);
 
-        $nomMedecin = (trim($nomMedecin));
-        $prenomMedecin = (trim($prenomMedecin));
-        $adresseMedecin = (trim($adresseMedecin));
+        $nomMedecin = conversion($nomMedecin);
+        $prenomMedecin = conversion($prenomMedecin);
+        $adresseMedecin = conversion($adresseMedecin);
 
-        $nomContact = (trim($nomContact));
-        $prenomContact = (trim($prenomContact));
-        $qualiteContact = (trim($qualiteContact));
+        $nomContact = conversion($nomContact);
+        $prenomContact = conversion($prenomContact);
+        $qualiteContact = conversion($qualiteContact);
 
 
         $extensionPhoto=substr($_FILES['photo']['name'],-4,4);    //prendre l'extension du fichier
@@ -150,40 +151,40 @@
         //INSCRIPTION POUR MINEUR
 
         if (isset($_POST['inscriptionMineur'])){
-            $nom = (trim($nom));
-            $prenom = (trim($prenom));
-            $lieuNaissance = (trim($lieuNaissance));
-            $adresse = (trim($adresse));
-            $ville = (trim($ville));
-            $nationalite = (trim($nationalite));
+            $nom = conversion($nom);
+            $prenom = conversion($prenom);
+            $lieuNaissance = conversion($lieuNaissance);
+            $adresse = conversion($adresse);
+            $ville = conversion($ville);
+            $nationalite = conversion($nationalite);
             
-            $nomPere = (trim($nomPere));
-            $prenomPere = (trim($prenomPere));
-            $mailPere = (trim($mailPere));
-            $professionPere = (trim($professionPere));
-            $adressePere = (trim($adressePere));
-            $villePere = (trim($villePere));
-            $mdpPere = (hash('sha512', $mdpPere));
+            $nomPere = conversion($nomPere);
+            $prenomPere = conversion($prenomPere);
+            $mailPere = conversion($mailPere);
+            $professionPere = conversion($professionPere);
+            $adressePere = conversion($adressePere);
+            $villePere = conversion($villePere);
+            $mdpPere = password_hash($mdpPere, PASSWORD_DEFAULT);
 
-            $mdpMere = (hash('sha512', $mdpMere));
-            $nomMere = (trim($nomMere));
-            $prenomMere = (trim($prenomMere));
-            $mailMere = (trim($mailMere));
-            $professionMere = (trim($professionMere));
-            $adresseMere = (trim($adresseMere));
-            $villeMere = (trim($villeMere));
+            $mdpMere = password_hash($mdpMere, PASSWORD_DEFAULT);
+            $nomMere = conversion($nomMere);
+            $prenomMere = conversion($prenomMere);
+            $mailMere = conversion($mailMere);
+            $professionMere = conversion($professionMere);
+            $adresseMere = conversion($adresseMere);
+            $villeMere = conversion($villeMere);
 
-            $lieuCharte = (trim($lieuCharte));
+            $lieuCharte = conversion($lieuCharte);
     
-            $lieuSoin = (trim($lieuSoin));
+            $lieuSoin = conversion($lieuSoin);
     
-            $nomMedecin = (trim($nomMedecin));
-            $prenomMedecin = (trim($prenomMedecin));
-            $adresseMedecin = (trim($adresseMedecin));
+            $nomMedecin = conversion($nomMedecin);
+            $prenomMedecin = conversion($prenomMedecin);
+            $adresseMedecin = conversion($adresseMedecin);
     
-            $nomContact = (trim($nomContact));
-            $prenomContact = (trim($prenomContact));
-            $qualiteContact = (trim($qualiteContact));
+            $nomContact = conversion($nomContact);
+            $prenomContact = conversion($prenomContact);
+            $qualiteContact = conversion($qualiteContact);
     
     
             $extensionPhoto=substr($_FILES['photo']['name'],-4,4);    //prendre l'extension du fichier
