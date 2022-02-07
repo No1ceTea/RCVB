@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 26 jan. 2022 à 15:39
+-- Généré le : lun. 07 fév. 2022 à 09:12
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -30,12 +30,12 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `actualites`;
 CREATE TABLE IF NOT EXISTS `actualites` (
   `idActu` int(3) NOT NULL AUTO_INCREMENT,
-  `titre` varchar(100) DEFAULT NULL,
-  `texte` text,
+  `titre` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `texte` text CHARACTER SET latin1,
   `datePublication` datetime DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`idActu`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `adherents` (
   `telPortable` char(14) COLLATE utf8_bin NOT NULL,
   `telDomicile` char(14) COLLATE utf8_bin NOT NULL,
   `mail` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `mdp` char(128) COLLATE utf8_bin DEFAULT NULL,
+  `mdp` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `nationalite` varchar(30) COLLATE utf8_bin NOT NULL,
   `numSS` char(15) COLLATE utf8_bin NOT NULL,
   `idPere` int(4) DEFAULT NULL,
@@ -74,7 +74,31 @@ CREATE TABLE IF NOT EXISTS `adherents` (
   KEY `idCharte` (`idCharte`),
   KEY `idMT` (`idMT`),
   KEY `idMere` (`idMere`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `adherents`
+--
+
+INSERT INTO `adherents` (`idAdh`, `nom`, `prenom`, `dateNaiss`, `lieuNaiss`, `adresse`, `ville`, `cp`, `telPortable`, `telDomicile`, `mail`, `mdp`, `nationalite`, `numSS`, `idPere`, `idCat`, `idAutorisation`, `idPC`, `idCharte`, `idMT`, `idMere`) VALUES
+(4, 'dqd', 'qzdqd', '2022-01-11', 'dqdq', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'rhui@gmail.com', '6edd370a9c436148013d12e5f7778ce8a2d36b64071d360ae580a05605f38f396ef189006d65da4e319541f3a6344a96caf359843e37976ec92dd9c0f88b899e', 'dqdq', '121212121212121', NULL, NULL, 4, 4, 4, 4, NULL),
+(5, 'aaa', 'aaa', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'rhui@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$NkRTd3lFcGU4L1VUSjZTOQ$VxeRzv3a4m0NjCz0px6ief/grFxfxZkjkVgVf5DZCUo', 'dqdq', '121212121212121', NULL, NULL, 5, 5, 5, 5, NULL),
+(6, 'aaa', 'aaa', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'rhui@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$WDJ0R3cySGlTV0ljLndxTQ$nCjgz73bvqQW4gPGjQ4faX4mxeq3aJozLA0/U2liIpo', 'dqdq', '121212121212121', NULL, NULL, 6, 6, 6, 6, NULL),
+(7, 'aaa', 'aaa', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'rhui@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$YTZNNFpsSXI4dnBzU0dzYw$PoGmb9yeCvR2g10VFh4F0TSi5GMQJVgKk2u0b4rWtK4', 'dqdq', '121212121212121', NULL, NULL, 7, 7, 7, 7, NULL),
+(8, 'aaa', 'aaa', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'rhui@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$OWd0Y0M1WUJPMzM5aDhPeA$rhk6b401H3yE5fWCYZAF1sclSBGQdzVWJgAlFgZ/z8c', 'dqdq', '121212121212121', NULL, NULL, 8, 8, 8, 8, NULL),
+(9, 'aaa', 'aaa', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'rhui@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$cVJtM2NDS3U5SXpXUWRWVQ$haqdRl+vRCql75bDJMYDGAwL7Lkz4XY4CJKBxYOXBmY', 'dqdq', '121212121212121', NULL, NULL, 9, 9, 9, 9, NULL),
+(10, 'aaa', 'aaa', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'rhui@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$dW5lblRSeUZGSzRzYng5ag$2oXCBMisnBd9b7GgwTw3N+YgRNXtoScSAKOyyTKB3Lc', 'dqdq', '121212121212121', NULL, NULL, 10, 10, 10, 10, NULL),
+(11, 'bbb', 'bbb', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'bbb@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$YmVFYjlGOHlWMWRHamhIbQ$/HpKCtDIDrhZ8h9tGjSJK/+K9dlBGONM5YsKlbYVmB4', 'dqdq', '121212121212121', NULL, NULL, 11, 11, 11, 11, NULL),
+(12, 'ccc', 'ccc', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'ccc@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$NjNmQjdPN3BPVTdYSTd6Mg$yfhtQlXJzGhD7jTJqz6kJpdvcy7F6oCEaRpd7U8g9/w', 'dqdq', '121212121212121', NULL, NULL, 12, 12, 12, 12, NULL),
+(13, 'ddd', 'ddd', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'ddd@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$RXRyZXNrS3RZdzMwZVR3Vw$VLpvBuYCNth6L8NGb/l7B+rWBFQSymidr8StWog8YSo', 'dqdq', '121212121212121', NULL, NULL, 13, 13, 13, 13, NULL),
+(14, 'eee', 'eee', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'eee@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$M1FBQVhURUZ0RC5GWlA2MA$bHilTnlPyaOyWc3Nl8Lxsbsy2avXNRlJxRGsQzdwtFs', 'dqdq', '121212121212121', NULL, NULL, 14, 14, 14, 14, NULL),
+(15, 'eee', 'eee', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'eee@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$bk5CbU1SR1Mzdm9nOEJxVQ$uB+BxYpxfoUXjCXnSHeElbbK0cv18l44wql0h3+fC7I', 'dqdq', '121212121212121', NULL, NULL, 15, 15, 15, 15, NULL),
+(16, 'fff', 'fff', '2021-12-28', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'fff@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$L3pZUVByTmZrdEpEdFlDMg$gG+2FOYygt1v8/F5zCKMeHp+k3Yh1KOPWOLnlcmPo/g', 'dqdq', '121212121212121', NULL, 'U8', 16, 16, 16, 16, NULL),
+(17, 'dqdgg', 'dqdgg', '2021-12-29', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'ggg@gmail.com', '$2y$10$5ELw5kA5cpEKTzC4NGQ/P.5AsOfcoh.mW885oXUymp3uh9Kl99FdK', 'dqdq', '121212121212121', NULL, NULL, 30, 30, 30, 30, NULL),
+(18, 'dqdgg', 'qzdqd', '2021-12-29', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'ggg@gmail.com', '$2y$10$6HfSBpMQbLIAjJj4nmyxeu.RY688DOc393sFXpNNuR5T3Ulf4OvNe', 'dqdq', '121212121212121', NULL, NULL, 31, 31, 31, 31, NULL),
+(19, 'hhh', 'hhh', '2022-02-05', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'hhh@gmail.com', '$2y$10$Bk4ZDdiJhXpET7vu4FSLm.q1ZYPVxACE0/2GU0ayA9Rvvzt/FhPRS', 'dqdq', '121212121212121', NULL, 'RA', 32, 32, 32, 32, NULL),
+(20, 'dqd', 'qzdqd', '2022-02-03', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'dqzd@gmail.com', '$2y$10$NWsxtjOBshQ6jNJn5W8yV.TLFXu016MTI4uKGC2cUlikkXgmCyYkG', 'dqdq', '121212121212121', NULL, NULL, 33, 33, 33, 33, NULL),
+(21, 'dqd', 'qzdqd', '2022-02-03', 'qzd', 'qzdd', 'qzdqz', '55555', '05 05 05 05 05', '06 06 03 02 01', 'dqzd@gmail.com', '$2y$10$0usuk5aBI1/UQR78krYlU.IBkU40Hp0Dgmpan5d5FbSafpkWcBXke', 'dqdq', '121212121212121', NULL, NULL, 34, 34, 34, 34, NULL);
 
 -- --------------------------------------------------------
 
@@ -91,12 +115,47 @@ CREATE TABLE IF NOT EXISTS `autorisation` (
   `sortie` tinyint(1) NOT NULL,
   `image` tinyint(1) NOT NULL,
   PRIMARY KEY (`idAutorisation`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `autorisation`
 --
 
+INSERT INTO `autorisation` (`idAutorisation`, `participation`, `encadrer`, `CNILFRR`, `sortie`, `image`) VALUES
+(1, 1, 1, 1, 1, 0),
+(2, 1, 1, 1, 1, 0),
+(3, 1, 1, 1, 1, 0),
+(4, 1, 1, 1, 1, 1),
+(5, 1, 1, 0, 1, 0),
+(6, 1, 1, 0, 1, 0),
+(7, 1, 1, 0, 1, 0),
+(8, 1, 1, 0, 1, 0),
+(9, 1, 1, 0, 1, 0),
+(10, 1, 1, 0, 1, 0),
+(11, 1, 1, 0, 1, 0),
+(12, 1, 1, 0, 1, 0),
+(13, 1, 1, 0, 1, 0),
+(14, 1, 1, 0, 1, 0),
+(15, 1, 1, 0, 1, 0),
+(16, 1, 1, 0, 1, 0),
+(17, 1, 1, 1, 1, 1),
+(18, 1, 1, 1, 1, 1),
+(19, 1, 1, 1, 1, 1),
+(20, 1, 1, 1, 1, 1),
+(21, 1, 1, 1, 1, 1),
+(22, 1, 1, 1, 1, 1),
+(23, 1, 1, 1, 1, 1),
+(24, 1, 1, 1, 1, 1),
+(25, 1, 1, 1, 1, 1),
+(26, 1, 1, 1, 1, 1),
+(27, 1, 1, 1, 1, 1),
+(28, 1, 1, 1, 1, 1),
+(29, 1, 1, 1, 1, 1),
+(30, 1, 1, 1, 1, 1),
+(31, 1, 1, 1, 1, 1),
+(32, 1, 1, 0, 0, 0),
+(33, 1, 1, 1, 1, 1),
+(34, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -144,15 +203,67 @@ INSERT INTO `categorie` (`idCat`, `nomCat`, `idResp`, `idEntrn`, `prix`) VALUES
 DROP TABLE IF EXISTS `charte`;
 CREATE TABLE IF NOT EXISTS `charte` (
   `idCharte` int(4) NOT NULL AUTO_INCREMENT,
-  `lieu` varchar(50) DEFAULT NULL,
+  `lieu` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`idCharte`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `charte`
 --
 
+INSERT INTO `charte` (`idCharte`, `lieu`, `date`) VALUES
+(1, 'qzd', '2022-01-06 00:00:00'),
+(2, 'qzd', '2022-01-06 00:00:00'),
+(3, 'qzd', '2022-01-06 00:00:00'),
+(4, 'qzd', '2021-12-29 00:00:00'),
+(5, 'qzd', '2022-01-06 00:00:00'),
+(6, 'qzd', '2022-01-06 00:00:00'),
+(7, 'qzd', '2022-01-06 00:00:00'),
+(8, 'qzd', '2022-01-06 00:00:00'),
+(9, 'qzd', '2022-01-06 00:00:00'),
+(10, 'qzd', '2022-01-06 00:00:00'),
+(11, 'qzd', '2022-01-06 00:00:00'),
+(12, 'qzd', '2022-01-06 00:00:00'),
+(13, 'qzd', '2022-01-06 00:00:00'),
+(14, 'qzd', '2022-01-06 00:00:00'),
+(15, 'qzd', '2022-01-06 00:00:00'),
+(16, 'qzd', '2022-01-06 00:00:00'),
+(17, NULL, '2022-01-05 00:00:00'),
+(18, NULL, '2022-01-05 00:00:00'),
+(19, NULL, '2022-01-05 00:00:00'),
+(20, NULL, '2022-01-05 00:00:00'),
+(21, NULL, '2022-01-05 00:00:00'),
+(22, NULL, '2022-01-05 00:00:00'),
+(23, NULL, '2022-01-05 00:00:00'),
+(24, NULL, '2022-01-05 00:00:00'),
+(25, NULL, '2021-12-30 00:00:00'),
+(26, NULL, '2021-12-30 00:00:00'),
+(27, NULL, '2021-12-30 00:00:00'),
+(28, NULL, '2021-12-30 00:00:00'),
+(29, NULL, '2021-12-30 00:00:00'),
+(30, 'qzd', '2021-12-30 00:00:00'),
+(31, 'qzd', '2021-12-30 00:00:00'),
+(32, 'qzd', '2022-02-05 00:00:00'),
+(33, 'qzd', '2022-01-11 00:00:00'),
+(34, 'qzd', '2022-01-11 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `competition`
+--
+
+DROP TABLE IF EXISTS `competition`;
+CREATE TABLE IF NOT EXISTS `competition` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `lieu` varchar(30) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `heure` datetime DEFAULT NULL,
+  `idCat` varchar(4) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idCat` (`idCat`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -213,9 +324,9 @@ CREATE TABLE IF NOT EXISTS `entraineurs` (
   `nom` varchar(40) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
   `mail` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `telephone` char(10) COLLATE utf8_bin DEFAULT NULL,
+  `telephone` char(14) COLLATE utf8_bin DEFAULT NULL,
   `idEntrainement` int(2) DEFAULT NULL,
-  `mdp` varchar(128) COLLATE utf8_bin NOT NULL,
+  `mdp` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idEntrn`),
   KEY `idEntrainement` (`idEntrainement`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -244,11 +355,11 @@ CREATE TABLE IF NOT EXISTS `manager` (
   `idManager` int(2) NOT NULL AUTO_INCREMENT,
   `nom` varchar(40) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
-  `mdp` varchar(128) COLLATE utf8_bin NOT NULL,
+  `mdp` varchar(255) COLLATE utf8_bin NOT NULL,
   `mail` varchar(255) COLLATE utf8_bin NOT NULL,
   `telPortable` char(14) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idManager`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `manager`
@@ -256,11 +367,7 @@ CREATE TABLE IF NOT EXISTS `manager` (
 
 INSERT INTO `manager` (`idManager`, `nom`, `prenom`, `mdp`, `mail`, `telPortable`) VALUES
 (1, 'Guirassy', 'Fatou', '0000', 'fg@hotmail.com', '0678987899'),
-(2, 'theveu', 'ronan', '7343ee13f38e6228eafc531156fddce9', 'ronantheveu@gmail.com', '0651633085'),
-(3, 'dqzd', 'zqdqdz', 'aaaa', 'dqd@gmail.com', '05 02 03 06 05'),
-(4, 'dzqd', 'dqzd', '1b86355f13a7f0b90c8b6053c0254399994dfbb3843e08d603e292ca13b8f672ed5e58791c10f3e36daec9699cc2fbdc88b4fe116efa7fce016938b787043818', 'dq@gmail.com', '05 02 03 06 06'),
-(5, 'da', 'daad', '6c89030400dbcd6561f8e03c8ccbeff4d8150988e635af53a581622da3223e37a64abb3f26a1cff7f0014c32e4ca615e76534fb53830e54c67603b892124c8d1', 'aa@gmail.com', '05 04 05 06 06'),
-(6, 'dqd', 'qddqd', '5e3b118f9e6917361f4a1e222becdf0ba765ba94447ee0065776a596007156bc0e570e6446e6bdf68e33fa182915dd36a155162b29a0f5a40feca462a5985fdd', 'qq@gmail.com', '05 04 02 01 01');
+(2, 'theveu', 'ronan', '$2y$10$1YGCJBi2L.mSq02mCH2ACO8hPuhgMnhliyRBDHEdgERpTGKE9Mg8u', 'ronan@gmail.com', '06 06 05 04 01');
 
 -- --------------------------------------------------------
 
@@ -271,17 +378,52 @@ INSERT INTO `manager` (`idManager`, `nom`, `prenom`, `mdp`, `mail`, `telPortable
 DROP TABLE IF EXISTS `medecintraitant`;
 CREATE TABLE IF NOT EXISTS `medecintraitant` (
   `idMT` int(3) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(40) DEFAULT NULL,
-  `prenom` varchar(40) DEFAULT NULL,
-  `adresse` varchar(100) DEFAULT NULL,
-  `tel` char(14) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `nom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `prenom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `adresse` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `tel` char(14) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idMT`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `medecintraitant`
 --
 
+INSERT INTO `medecintraitant` (`idMT`, `nom`, `prenom`, `adresse`, `tel`) VALUES
+(1, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(2, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(3, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(4, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(5, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(6, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(7, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(8, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(9, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(10, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(11, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(12, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(13, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(14, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(15, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(16, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(17, NULL, NULL, NULL, '01 02 05 06 06'),
+(18, NULL, NULL, NULL, '01 02 05 06 06'),
+(19, NULL, NULL, NULL, '01 02 05 06 06'),
+(20, NULL, NULL, NULL, '01 02 05 06 06'),
+(21, NULL, NULL, NULL, '01 02 05 06 06'),
+(22, NULL, NULL, NULL, '01 02 05 06 06'),
+(23, NULL, NULL, NULL, '01 02 05 06 06'),
+(24, NULL, NULL, NULL, '01 02 05 06 06'),
+(25, NULL, NULL, NULL, '01 02 05 06 06'),
+(26, NULL, NULL, NULL, '01 02 05 06 06'),
+(27, NULL, NULL, NULL, '01 02 05 06 06'),
+(28, NULL, NULL, NULL, '01 02 05 06 06'),
+(29, NULL, NULL, NULL, '01 02 05 06 06'),
+(30, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(31, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(32, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(33, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06'),
+(34, 'dzqd', 'qzdqzd', 'qzdd', '01 02 05 06 06');
 
 -- --------------------------------------------------------
 
@@ -292,23 +434,28 @@ CREATE TABLE IF NOT EXISTS `medecintraitant` (
 DROP TABLE IF EXISTS `mere`;
 CREATE TABLE IF NOT EXISTS `mere` (
   `idMere` int(4) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(40) DEFAULT NULL,
-  `prenom` varchar(40) DEFAULT NULL,
-  `mail` varchar(255) DEFAULT NULL,
-  `mdp` varchar(128) DEFAULT NULL,
-  `profession` varchar(30) DEFAULT NULL,
-  `adresse` varchar(100) DEFAULT NULL,
-  `ville` varchar(40) DEFAULT NULL,
-  `cp` char(5) DEFAULT NULL,
-  `telPortable` char(14) DEFAULT NULL,
-  `telDomicile` char(14) DEFAULT NULL,
-  `entreprise` varchar(30) DEFAULT NULL,
+  `nom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `prenom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `mail` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `mdp` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `profession` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
+  `adresse` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `ville` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `cp` char(5) CHARACTER SET latin1 DEFAULT NULL,
+  `telPortable` char(14) CHARACTER SET latin1 DEFAULT NULL,
+  `telDomicile` char(14) CHARACTER SET latin1 DEFAULT NULL,
+  `entreprise` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`idMere`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `mere`
 --
+
+INSERT INTO `mere` (`idMere`, `nom`, `prenom`, `mail`, `mdp`, `profession`, `adresse`, `ville`, `cp`, `telPortable`, `telDomicile`, `entreprise`) VALUES
+(1, 'sed', 'zfz', 'dqzd@gmail.com', '3faa723542eb35450093333e0ab19d3a167bf211a0a928f5cb860a0f48f05bb99e2b0793a270d4b0f20526a8786b1bc778ddcb3abedf41742db57d4c0f46f0b3', 'sffe', 'zfzfz', 'zdz', '47777', '05 04 01 02 01', '01 01 01 02 03', 'zfzf'),
+(2, 'sed', 'zfz', 'dqzd@gmail.com', '3faa723542eb35450093333e0ab19d3a167bf211a0a928f5cb860a0f48f05bb99e2b0793a270d4b0f20526a8786b1bc778ddcb3abedf41742db57d4c0f46f0b3', 'sffe', 'zfzfz', 'zdz', '47777', '05 04 01 02 01', '01 01 01 02 03', 'zfzf'),
+(3, 'sed', 'zfz', 'dqzd@gmail.com', 'd6f644b19812e97b5d871658d6d3400ecd4787faeb9b8990c1e7608288664be77257104a58d033bcf1a0e0945ff06468ebe53e2dff36e248424c7273117dac09', 'sffe', 'zfzfz', 'zdz', '47777', '05 04 01 02 01', '01 01 01 02 03', 'zfzf');
 
 -- --------------------------------------------------------
 
@@ -319,12 +466,12 @@ CREATE TABLE IF NOT EXISTS `mere` (
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
   `idMessage` int(11) NOT NULL,
-  `nom` varchar(40) DEFAULT NULL,
-  `prenom` varchar(40) DEFAULT NULL,
-  `mail` varchar(255) DEFAULT NULL,
-  `message` text,
+  `nom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `prenom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `mail` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `message` text CHARACTER SET latin1,
   PRIMARY KEY (`idMessage`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -335,9 +482,9 @@ CREATE TABLE IF NOT EXISTS `message` (
 DROP TABLE IF EXISTS `partenaire`;
 CREATE TABLE IF NOT EXISTS `partenaire` (
   `idPartenaire` int(2) NOT NULL AUTO_INCREMENT,
-  `logo` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`idPartenaire`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -357,14 +504,19 @@ CREATE TABLE IF NOT EXISTS `pere` (
   `telPortable` char(14) COLLATE utf8_bin NOT NULL,
   `telDomicile` char(14) COLLATE utf8_bin NOT NULL,
   `mail` char(255) COLLATE utf8_bin NOT NULL,
-  `mdp` varchar(128) COLLATE utf8_bin NOT NULL,
+  `mdp` varchar(255) COLLATE utf8_bin NOT NULL,
   `entreprise` varchar(30) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idPere`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `pere`
 --
+
+INSERT INTO `pere` (`idPere`, `nom`, `prenom`, `adresse`, `profession`, `ville`, `cp`, `telPortable`, `telDomicile`, `mail`, `mdp`, `entreprise`) VALUES
+(1, 'sef', 'esfs', 'qzdd', 'sfsf', 'qzd', '44444', '02 02 03 06 04', '01 05 04 08 09', 'fsfesf@gmail.com', '3863862886e379c0b09122262d21f465169e087c917e2e98e2e561e1b4ad6cf757297c61ec8e0f6c912538df37f4fe948960dc6ee17ff4fc71413a076cb48c5f', 'qzdq'),
+(2, 'sef', 'esfs', 'qzdd', 'sfsf', 'qzd', '44444', '02 02 03 06 04', '01 05 04 08 09', 'fsfesf@gmail.com', '3863862886e379c0b09122262d21f465169e087c917e2e98e2e561e1b4ad6cf757297c61ec8e0f6c912538df37f4fe948960dc6ee17ff4fc71413a076cb48c5f', 'qzdq'),
+(3, 'sef', 'esfs', 'qzdd', 'sfsf', 'qzd', '44444', '02 02 03 06 04', '01 05 04 08 09', 'fsfesf@gmail.com', 'f6c5600ed1dbdcfdf829081f5417dccbbd2b9288e0b427e65c8cf67e274b69009cd142475e15304f599f429f260a661b5df4de26746459a3cef7f32006e5d1c1', 'qzdq');
 
 -- --------------------------------------------------------
 
@@ -375,17 +527,53 @@ CREATE TABLE IF NOT EXISTS `pere` (
 DROP TABLE IF EXISTS `personnecontact`;
 CREATE TABLE IF NOT EXISTS `personnecontact` (
   `idPC` int(4) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(40) DEFAULT NULL,
-  `prenom` varchar(40) DEFAULT NULL,
-  `qualite` varchar(30) DEFAULT NULL,
-  `telPortable` char(14) DEFAULT NULL,
-  `telDomicile` char(14) DEFAULT NULL,
+  `nom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `prenom` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
+  `qualite` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
+  `telPortable` char(14) CHARACTER SET latin1 DEFAULT NULL,
+  `telDomicile` char(14) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`idPC`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `personnecontact`
 --
+
+INSERT INTO `personnecontact` (`idPC`, `nom`, `prenom`, `qualite`, `telPortable`, `telDomicile`) VALUES
+(1, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(2, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(3, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(4, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(5, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(6, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(7, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(8, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(9, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(10, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(11, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(12, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(13, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(14, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(15, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(16, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(17, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(18, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(19, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(20, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(21, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(22, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(23, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(24, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(25, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(26, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(27, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(28, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(29, NULL, NULL, NULL, '01 01 02 02 02', '01 05 80 96 08'),
+(30, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(31, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(32, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(33, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08'),
+(34, 'qzdq', 'dzqdqdqzdq', 'qzdq', '01 01 02 02 02', '01 05 80 96 08');
 
 -- --------------------------------------------------------
 
@@ -395,25 +583,26 @@ CREATE TABLE IF NOT EXISTS `personnecontact` (
 
 DROP TABLE IF EXISTS `responsable`;
 CREATE TABLE IF NOT EXISTS `responsable` (
-  `idResp` int(2) NOT NULL,
+  `idResp` int(2) NOT NULL AUTO_INCREMENT,
   `nom` varchar(40) COLLATE utf8_bin NOT NULL,
   `prenom` varchar(40) COLLATE utf8_bin NOT NULL,
   `mail` varchar(255) COLLATE utf8_bin NOT NULL,
-  `telephone` char(10) COLLATE utf8_bin DEFAULT NULL,
+  `telephone` char(14) COLLATE utf8_bin DEFAULT NULL,
   `poste` varchar(30) COLLATE utf8_bin NOT NULL,
+  `mdp` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idResp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `responsable`
 --
 
-INSERT INTO `responsable` (`idResp`, `nom`, `prenom`, `mail`, `telephone`, `poste`) VALUES
-(1, 'Zellner', 'Sylvie', 'sylvief94800@hotmail.fr', '0637590313', ''),
-(2, 'Lefranc', 'Anthony', 'lefranc.anthony94@gmail.com', '0661981067', ''),
-(3, 'Guglielminetti', 'Sophie', 'guglielminetti.sophie@neuf.fr', '', ''),
-(4, 'Corneille', 'Aurelie', 'aurelie94800@hotmail.com', '', ''),
-(5, 'Lucas', 'Elisabeth', 'bbth94550@hotmail.com', '0761621503', '');
+INSERT INTO `responsable` (`idResp`, `nom`, `prenom`, `mail`, `telephone`, `poste`, `mdp`) VALUES
+(1, 'Zellner', 'Sylvie', 'sylvief94800@hotmail.fr', '0637590313', '', ''),
+(2, 'Lefranc', 'Anthony', 'lefranc.anthony94@gmail.com', '0661981067', '', ''),
+(3, 'Guglielminetti', 'Sophie', 'guglielminetti.sophie@neuf.fr', '', '', ''),
+(4, 'Corneille', 'Aurelie', 'aurelie94800@hotmail.com', '', '', ''),
+(5, 'Lucas', 'Elisabeth', 'bbth94550@hotmail.com', '0761621503', '', '');
 
 -- --------------------------------------------------------
 
@@ -424,17 +613,53 @@ INSERT INTO `responsable` (`idResp`, `nom`, `prenom`, `mail`, `telephone`, `post
 DROP TABLE IF EXISTS `soin`;
 CREATE TABLE IF NOT EXISTS `soin` (
   `idSoin` int(4) NOT NULL AUTO_INCREMENT,
-  `lieuSoin` varchar(40) DEFAULT NULL,
+  `lieuSoin` varchar(40) CHARACTER SET latin1 DEFAULT NULL,
   `dateSoin` date DEFAULT NULL,
-  `nom` varchar(30) DEFAULT NULL,
-  `prenom` varchar(30) DEFAULT NULL,
-  `qualite` varchar(30) DEFAULT NULL,
+  `nom` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
+  `prenom` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
+  `qualite` varchar(30) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`idSoin`)
-) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `soin`
 --
+
+INSERT INTO `soin` (`idSoin`, `lieuSoin`, `dateSoin`, `nom`, `prenom`, `qualite`) VALUES
+(1, 'la', '2022-01-06', NULL, NULL, NULL),
+(2, 'la', '2022-01-06', NULL, NULL, NULL),
+(3, 'la', '2022-01-06', NULL, NULL, NULL),
+(4, 'la', '2022-01-05', NULL, NULL, NULL),
+(5, 'la', '2021-12-29', NULL, NULL, NULL),
+(6, 'la', '2021-12-29', NULL, NULL, NULL),
+(7, 'la', '2021-12-29', NULL, NULL, NULL),
+(8, 'la', '2021-12-29', NULL, NULL, NULL),
+(9, 'la', '2021-12-29', NULL, NULL, NULL),
+(10, 'la', '2021-12-29', NULL, NULL, NULL),
+(11, 'la', '2021-12-29', NULL, NULL, NULL),
+(12, 'la', '2021-12-29', NULL, NULL, NULL),
+(13, 'la', '2021-12-29', NULL, NULL, NULL),
+(14, 'la', '2021-12-29', NULL, NULL, NULL),
+(15, 'la', '2021-12-29', NULL, NULL, NULL),
+(16, 'la', '2021-12-29', NULL, NULL, NULL),
+(17, NULL, '2021-12-31', NULL, NULL, NULL),
+(18, NULL, '2021-12-31', NULL, NULL, NULL),
+(19, NULL, '2021-12-31', NULL, NULL, NULL),
+(20, NULL, '2021-12-31', NULL, NULL, NULL),
+(21, NULL, '2021-12-31', NULL, NULL, NULL),
+(22, NULL, '2021-12-31', NULL, NULL, NULL),
+(23, NULL, '2021-12-31', NULL, NULL, NULL),
+(24, NULL, '2021-12-31', NULL, NULL, NULL),
+(25, NULL, '2021-12-30', NULL, NULL, NULL),
+(26, NULL, '2021-12-30', NULL, NULL, NULL),
+(27, NULL, '2021-12-30', NULL, NULL, NULL),
+(28, NULL, '2021-12-30', NULL, NULL, NULL),
+(29, NULL, '2021-12-30', NULL, NULL, NULL),
+(30, 'la', '2021-12-30', NULL, NULL, NULL),
+(31, 'la', '2021-12-30', NULL, NULL, NULL),
+(32, 'la', '2022-02-03', NULL, NULL, NULL),
+(33, 'la', '2022-01-31', NULL, NULL, NULL),
+(34, 'la', '2022-01-31', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
