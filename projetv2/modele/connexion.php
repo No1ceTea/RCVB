@@ -16,7 +16,6 @@
         if (isset($_POST['connexion'])){
         $mail = htmlentities(trim($mail));
         $mdp = trim($mdp);
-        $hash = password_hash($mdp, PASSWORD_DEFAULT);
         
         //CONNEXION POUR L'ADHERENT
         if ($_SESSION['ChoixConnexion']=="adherent"){
@@ -28,9 +27,8 @@
             // la requete ne retourne rien
             if ($req['idAdh'] == ""){
                 $valid = false;
-                header('Location: ../vues/formConnexion.php');
+                header('Location: ../vues/choixConnexion.php');
             }
-        
         
             // la requete retourne le compte
             if ($valid){
@@ -38,15 +36,13 @@
                 $_SESSION['nom'] = $req['nom'];
                 $_SESSION['prenom'] = $req['prenom'];
                 $_SESSION['mail'] = $req['mail'];
+                $_SESSION['autorisation']='adherent';
                 header('Location: ../index.php');
-            }
-            else{
-                header('Location: ../vues/formConnexion.php');
             }
         }
 
 
-        //CONNEXION POUR LE ENTRAINEUR
+        //CONNEXION POUR L'ENTRAINEUR
         if ($_SESSION['ChoixConnexion']=="entraineur"){
             $req = $DB->query("SELECT * FROM entraineurs WHERE mail = ? ",
                 array($mail));
@@ -54,23 +50,18 @@
             $valid=password_verify($mdp, $req['mdp']);
         
             // la requete ne retourne rien
-            if ($req['idEntrn'] == ""){
-                $valid = false;
-                header('Location: ../vues/formConnexion.php');
+            if ($valid == false){
+                header('Location: ../vues/choixConnexion.php');
             }
         
-        
             // la requete retourne le compte
-            if ($valid){
+            else if ($valid){
                 $_SESSION['id'] = $req['idEntrn'];
                 $_SESSION['nom'] = $req['nom'];
                 $_SESSION['prenom'] = $req['prenom'];
                 $_SESSION['mail'] = $req['mail'];
-        
+                $_SESSION['autorisation']='entraineur';
                 header('Location: ../index.php');
-            }
-            else{
-                header('Location: ../vues/formConnexion.php');
             }
         }
 
@@ -82,11 +73,10 @@
             $valid=password_verify($mdp, $req['mdp']);
         
             // la requete ne retourne rien
-            if ($req['idEntrn'] == ""){
+            if ($req['idResp'] == ""){
                 $valid = false;
-                header('Location: ../vues/formConnexion.php');
+                header('Location: ../vues/choixConnexion.php');
             }
-        
         
             // la requete retourne le compte
             if ($valid){
@@ -94,11 +84,9 @@
                 $_SESSION['nom'] = $req['nom'];
                 $_SESSION['prenom'] = $req['prenom'];
                 $_SESSION['mail'] = $req['mail'];
+                $_SESSION['autorisation']='responsable';
         
                 header('Location: ../index.php');
-            }
-            else{
-                header('Location: ../vues/formConnexion.php');
             }
         }
 
@@ -113,11 +101,10 @@
             $valid=password_verify($mdp, $req['mdp']);
         
             // la requete ne retourne rien
-            if ($req['idEntrn'] == ""){
+            if ($req['idManager'] == ""){
                 $valid = false;
-                header('Location: ../vues/formConnexion.php');
+                header('Location: ../vues/choixConnexion.php');
             }
-        
         
             // la requete retourne le compte
             if ($valid){
@@ -125,14 +112,11 @@
                 $_SESSION['nom'] = $req['nom'];
                 $_SESSION['prenom'] = $req['prenom'];
                 $_SESSION['mail'] = $req['mail'];
-        
+                $_SESSION['autorisation']='manager';
+                
                 header('Location: ../index.php');
             }
-            else{
-                header('Location: ../vues/formConnexion.php');
-            }
         }
-        echo $_SESSION['ChoixConnexion'];
         }
     }
 ?>

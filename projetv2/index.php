@@ -5,6 +5,7 @@
   
   // Fichier PHP contenant la connexion à votre BDD
   include('modele/connexionDB.php');
+  error_reporting(0); //retirer les rapports d'erreurs
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +24,9 @@
   <h1>Mon site</h1>
 
   <?php
-   if(!isset($_SESSION['id'])){ // Si on ne détecte pas de session alors on verra les liens ci-dessous
+   if(empty($_SESSION['autorisation'])){ // Si on ne détecte pas de session alors on verra les liens ci-dessous
   ?>
    <a href="vues/formInscription.php">Inscription</a> <!-- Liens de nos futures pages -->
-   
-   
-   
    <?php 
    $_SESSION["form"]="age";
    ?>
@@ -36,11 +34,42 @@
   <?php
     }else{ // Sinon s'il y a une session alors on verra les liens ci-dessous
   ?>
-   <a href="profil.php">Mon profil</a>
-   <a href="modifier-profil.php">Modifier mon profil</a>
+   <a href="vues/modifProfilAdherent.php">Modifier mon profil</a>
    <a href="modele/deconnexion.php">Déconnexion</a>
   <?php
    }
+   if($_SESSION['autorisation']=="manager"){
   ?>
+
+<a href="vues/entraineur/gestionEntraineur.php">Gerer les entraineurs</a>
+<a href="vues/responsable/gestionResponsable.php">Gerer les responsables</a>
+<a href="vues/categorie/vueCategorie.php">voir les catégories</a>
+
+  <?php 
+    }
+    if($_SESSION['autorisation']=="entraineur"){
+  ?>
+<a href="vues/entraineur/formMDPEntraineur.php">Changer votre mot de passe</a>
+
+
+<?php 
+    }
+  ?>
+
+
+<?php 
+    if($_SESSION['autorisation']=="responsable"){
+  ?>
+<a href="vues/responsable/formMDPResponsable.php">Changer votre mot de passe</a>
+
+
+<?php 
+    }
+  ?>
+
+
+
+
+
  </body>
 </html>
