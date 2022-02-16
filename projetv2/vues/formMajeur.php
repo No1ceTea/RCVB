@@ -19,7 +19,7 @@
         <input type="text" placeholder="Votre prenom" name="prenom" required>
         <input type="email" placeholder="Adresse mail" name="mail" required>
         <input type="password" placeholder="Votre mot de passe" name="mdp" required> 
-        <input type="date" placeholder="Votre date de naissance" name="dateNaissance" required>
+        <input type="date" placeholder="Votre date de naissance" name="dateNaissance" max=<?php echo date('Y-m-d', mktime(0, 0, 0, date("m"), date("d"), date("Y")-18)); ?>    required>
         <input type="text" placeholder="Votre lieu de naissance" name="lieuNaissance" required> 
         <input type="text" placeholder="Votre adresse" name="adresse" required>
         <input type="text" placeholder="Votre ville" name="ville" required>
@@ -54,14 +54,10 @@
     <!-- pour la charte -->
     <br><br>
     <input type="text" placeholder="lieuCharte" name="lieuCharte" required>
-    <label>date du jour</label>
-    <input type="date" name="dateCharte" required> 
 
     <!-- pour l'autorisation de soin -->
     <br><br>
     <input type="text" placeholder="lieuSoin" name="lieuSoin" required>
-    <label>date du jour</label>
-    <input type="date" name="dateSoin" required> 
 
     <!-- pour le medecin traitant -->
     <br><br>
@@ -76,12 +72,17 @@
     <input type="text" placeholder="Votre prenom" name="prenomContact" required> 
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableContact" required>
     <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileContact" required> 
-    <input type="text" placeholder="qualite" name="qualiteContact" required>
+    <select name="qualiteContact" id="qualiteContact">
+      <option name="choixC" value="adherent">Père</option>
+      <option name="choixC" value="entraineur">Mère</option>
+      <option name="choixC" value="responsable">frère</option>
+      <option name="choixC" value="manager">Soeur</option>
+      <option name="choixC" value="manager">Grand-père</option>
+      <option name="choixC" value="manager">Grand-mère</option>
+      <option name="choixC" value="manager">Ami</option>
+    </select>
+    <button type="submit" name="inscriptionMajeur">Envoyer</button>
 
-
-
-
-        <button type="submit" name="inscriptionMajeur">Envoyer</button>
     </form>
   </body>
 </html>

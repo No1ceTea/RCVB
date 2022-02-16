@@ -41,4 +41,5 @@
   
   // Faire une connexion à votre fonction
   $DB = new connexionDB();
+
 ?>

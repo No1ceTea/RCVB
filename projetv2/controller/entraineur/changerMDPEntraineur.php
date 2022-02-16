@@ -12,14 +12,23 @@ if(!empty($_POST)){
     if(password_verify($mdp, $req['mdp'])==true){
         if($mdpC==$Nmdp){
             $mdpC = password_hash($mdpC, PASSWORD_DEFAULT);
-
             if(isset($_SESSION["autorisation"]) and $_SESSION["autorisation"]=="entraineur"){
                 $DB->insert("update entraineurs set mdp='$mdpC' where idEntrn=$id");
                 header("location:../../index.php") ;	
             }
-
+            else{
+                header("location:../../vues/entraineur/formMDPEntraineur.php");
+            }
+        }
+        else{
+            header("location:../../vues/entraineur/formMDPEntraineur.php");
         }
     }
+    else{
+        header("location:../../vues/entraineur/formMDPEntraineur.php");
+    }
+}
+else{
     header("location:../../vues/entraineur/formMDPEntraineur.php");
 }
 ?>

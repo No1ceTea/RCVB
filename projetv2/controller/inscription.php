@@ -12,6 +12,8 @@
     if(!empty($_POST)){
         extract($_POST);
         $valid = true;
+        $datejour = date("y-m-d");
+        
     
 
 
@@ -30,8 +32,10 @@
         $nationalite = conversion($nationalite);
         
         $lieuCharte = conversion($lieuCharte);
+        $dateCharte = $datejour;
 
         $lieuSoin = conversion($lieuSoin);
+        $dateSoin = $datejour;
 
         $nomMedecin = conversion($nomMedecin);
         $prenomMedecin = conversion($prenomMedecin);
@@ -175,9 +179,11 @@
             $villeMere = conversion($villeMere);
 
             $lieuCharte = conversion($lieuCharte);
-    
+            $dateCharte = $datejour;
+
             $lieuSoin = conversion($lieuSoin);
-    
+            $dateSoin = $datejour;
+
             $nomMedecin = conversion($nomMedecin);
             $prenomMedecin = conversion($prenomMedecin);
             $adresseMedecin = conversion($adresseMedecin);

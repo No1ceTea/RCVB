@@ -17,9 +17,19 @@ if(!empty($_POST)){
                 $DB->insert("update responsable set mdp='$mdpC' where idResp=$id");
                 header("location:../../index.php") ;	
             }
-
+            else{
+                header("location:../../vues/responsable/formMDPResponsable.php");
+            }
+        }
+        else{
+            header("location:../../vues/responsable/formMDPResponsable.php");
         }
     }
+    else{
+        header("location:../../vues/responsable/formMDPResponsable.php");
+    }
+}
+else{
     header("location:../../vues/responsable/formMDPResponsable.php");
 }
 ?>

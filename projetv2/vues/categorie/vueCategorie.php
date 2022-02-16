@@ -18,7 +18,7 @@ while($categorie = $res->fetch(PDO::FETCH_OBJ))
    ?>
    <div class='card text-center' style='width: 15rem;'>
               <div class='card-body'>
-                  <h5 class='card-title'><?php echo $categorie->nomCat ?></h5>
+                  <h5 class='card-title'><?php echo $categorie->idCat ?></h5>
 
                   <a id='mywish' class='btn btn-danger' href='../../controller/categorie/supprimer2Categorie.php?supp=<?php echo $categorie->idCat ;?>' onClick='return confirm("Voulez vous vraiment supprimer cet entraineur?")'>supprimer cette catégorie</a>
                   <br>
@@ -28,5 +28,5 @@ while($categorie = $res->fetch(PDO::FETCH_OBJ))
           <br><br>
 
 <?php
-  } // $produit->idEntrn
+  }
 ?> 
