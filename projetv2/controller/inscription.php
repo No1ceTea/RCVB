@@ -45,30 +45,33 @@
         $prenomContact = conversion($prenomContact);
         $qualiteContact = conversion($qualiteContact);
 
-
         $extensionPhoto=substr($_FILES['photo']['name'],-4,4);    //prendre l'extension du fichier
         $extensionIdentite=substr($_FILES['pieceIdentite']['name'],-4,4); //prendre l'extesion du fichier
 
-        $nomCompletIdentite="$nom $prenom$extensionIdentite"; //création du nom de fichier avec nom prenom et l'extension d'origine
+        $nomCompletIdentite="ID$extensionIdentite"; //création du nom de fichier avec nom prenom et l'extension d'origine
         $_FILES['pieceIdentite']['name']=$nomCompletIdentite;
 
-        $nomCompletphoto="$nom $prenom$extensionPhoto"; //création du nom de fichier avec nom prenom et l'extension d'origine
+        $nomCompletphoto="photo$extensionPhoto"; //création du nom de fichier avec nom prenom et l'extension d'origine
         $_FILES['photo']['name']=$nomCompletphoto;
     
-
-        $destinationP="C:/wamp/www/RCVB.V2/projetv2/images/photo/";
-        $destinationI="C:/wamp/www/RCVB.V2/projetv2/images/pieceIdentite/";
-        $accesI="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['pieceIdentite']['name'];
-        $accesP="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['photo']['name'];
+        
         
 
+        $accesI="../controller/".$_FILES['pieceIdentite']['name'];
+        $accesP="../controller/".$_FILES['photo']['name'];
+        
+        $nomCompletAdh="$nom $prenom";
 
+        $pathRepertory="../images/$nomCompletAdh/";
+        if(!is_dir($pathRepertory)){
+            mkdir($pathRepertory,0777,true);
+        }
 
         if (isset($_FILES['photo']['tmp_name'])) {
             $photo = copy($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
             if($photo) {
                 $source_file = $accesP;
-                $destination_path = $destinationP;
+                $destination_path = $pathRepertory;
                 rename($source_file, $destination_path . pathinfo($source_file, PATHINFO_BASENAME));
             }
         }
@@ -77,7 +80,7 @@
             $pieceIdentite = copy($_FILES['pieceIdentite']['tmp_name'], $_FILES['pieceIdentite']['name']);
             if($pieceIdentite) {
                 $source_file = $accesI;
-                $destination_path = $destinationI;
+                $destination_path = $pathRepertory;
                 rename($source_file, $destination_path . pathinfo($source_file, PATHINFO_BASENAME));
             }
         }
@@ -139,15 +142,19 @@
                 $idMedecinTraitant=array_unique($idMedecinTraitant);
                 $idMedecinTraitant = implode(" ", $idMedecinTraitant);
 
+                $idSoin = $DB->query("SELECT idSoin from soin order by idSoin DESC LIMIT 1");
+                $idSoin=$idSoin->fetch();
+                $idSoin=array_unique($idSoin);
+                $idSoin = implode(" ", $idSoin);
+
 
 
             
-                $DB->insert("INSERT INTO adherents ( nom, prenom, dateNaiss, lieuNaiss, adresse, ville, cp, telPortable, telDomicile, mail, nationalite, numSS, mdp, idAutorisation, idPC, idCharte, idMT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                array($nom, $prenom, $dateNaissance, $lieuNaissance, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $nationalite, $numSS, $mdp, $idAutorisation, $personneContact, $idCharte, $idMedecinTraitant));
+                $DB->insert("INSERT INTO adherents ( nom, prenom, dateNaiss, lieuNaiss, adresse, ville, cp, telPortable, telDomicile, mail, nationalite, numSS, mdp, idAutorisation, idPC, idCharte, idMT, idSoin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                array($nom, $prenom, $dateNaissance, $lieuNaissance, $adresse, $ville, $cp, $telPortable, $telDomicile, $mail, $nationalite, $numSS, $mdp, $idAutorisation, $personneContact, $idCharte, $idMedecinTraitant, $idSoin));
                 
                 header('Location: ../index.php');
                 exit;
-
             }
         }
 
@@ -183,6 +190,9 @@
 
             $lieuSoin = conversion($lieuSoin);
             $dateSoin = $datejour;
+            $prenomSoin = conversion($prenomSoin);
+            $nomSoin = conversion($nomSoin);
+            $qualiteSoin = conversion($qualiteSoin);
 
             $nomMedecin = conversion($nomMedecin);
             $prenomMedecin = conversion($prenomMedecin);
@@ -196,26 +206,30 @@
             $extensionPhoto=substr($_FILES['photo']['name'],-4,4);    //prendre l'extension du fichier
             $extensionIdentite=substr($_FILES['pieceIdentite']['name'],-4,4); //prendre l'extesion du fichier
     
-            $nomCompletIdentite="$nom $prenom$extensionIdentite"; //création du nom de fichier avec nom prenom et l'extension d'origine
+            $nomCompletIdentite="ID$extensionIdentite"; //création du nom de fichier avec nom prenom et l'extension d'origine
             $_FILES['pieceIdentite']['name']=$nomCompletIdentite;
     
-            $nomCompletphoto="$nom $prenom$extensionPhoto"; //création du nom de fichier avec nom prenom et l'extension d'origine
+            $nomCompletphoto="photo$extensionPhoto"; //création du nom de fichier avec nom prenom et l'extension d'origine
             $_FILES['photo']['name']=$nomCompletphoto;
         
-    
-            $destinationP="C:/wamp/www/RCVB.V2/projetv2/images/photo/";
-            $destinationI="C:/wamp/www/RCVB.V2/projetv2/images/pieceIdentite/";
-            $accesI="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['pieceIdentite']['name'];
-            $accesP="C:/wamp/www/RCVB.V2/projetv2/controller/".$_FILES['photo']['name'];
             
-    
-    
+            
+
+            $accesI="../controller/".$_FILES['pieceIdentite']['name'];
+            $accesP="../controller/".$_FILES['photo']['name'];
+            
+            $nomCompletAdh="$nom $prenom";
+
+            $pathRepertory="../images/$nomCompletAdh/";
+            if(!is_dir($pathRepertory)){
+                mkdir($pathRepertory,0777,true);
+            }
     
             if (isset($_FILES['photo']['tmp_name'])) {
                 $photo = copy($_FILES['photo']['tmp_name'], $_FILES['photo']['name']);
                 if($photo) {
                     $source_file = $accesP;
-                    $destination_path = $destinationP;
+                    $destination_path = $pathRepertory;
                     rename($source_file, $destination_path . pathinfo($source_file, PATHINFO_BASENAME));
                 }
             }
@@ -224,7 +238,7 @@
                 $pieceIdentite = copy($_FILES['pieceIdentite']['tmp_name'], $_FILES['pieceIdentite']['name']);
                 if($pieceIdentite) {
                     $source_file = $accesI;
-                    $destination_path = $destinationI;
+                    $destination_path = $pathRepertory;
                     rename($source_file, $destination_path . pathinfo($source_file, PATHINFO_BASENAME));
                 }
             }
@@ -243,8 +257,8 @@
                     $DB->insert("INSERT INTO charte (lieu, date) VALUES(?, ?)",
                         array($lieuCharte, $dateCharte));
                 
-                    $DB->insert("INSERT INTO soin (lieuSoin, dateSoin) VALUES(?, ?)",
-                        array($lieuSoin, $dateSoin));
+                    $DB->insert("INSERT INTO soin (lieuSoin, dateSoin, qualite, prenom, nom) VALUES(?, ?, ?, ?, ?)",
+                        array($lieuSoin, $dateSoin, $qualiteSoin, $prenomSoin, $nomSoin));
     
                     $DB->insert("INSERT INTO medecintraitant (nom, prenom, adresse, tel) VALUES(?, ?, ?, ?)",
                         array($nomMedecin, $prenomMedecin, $adresseMedecin, $telPortableMedecin));
@@ -292,14 +306,19 @@
                     $idMere=$idMere->fetch();
                     $idMere=array_unique($idMere);
                     $idMere = implode(" ", $idMere);
+
+                    $idSoin = $DB->query("SELECT idSoin from soin order by idSoin DESC LIMIT 1");
+                    $idSoin=$idSoin->fetch();
+                    $idSoin=array_unique($idSoin);
+                    $idSoin = implode(" ", $idSoin);
                 
-                    $DB->insert("INSERT INTO adherents ( nom, prenom, dateNaiss, lieuNaiss, adresse, ville, cp, telPortable, telDomicile, nationalite, numSS, idAutorisation, idPC, idCharte, idMT, idMere, idPere) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                        array($nom, $prenom, $dateNaissance, $lieuNaissance, $adresse, $ville, $cp, $telPortable, $telDomicile, $nationalite, $numSS, $idAutorisation, $idPersonneContact, $idCharte, $idMedecinTraitant, $idMere, $idPere));
+                    $DB->insert("INSERT INTO adherents ( nom, prenom, dateNaiss, lieuNaiss, adresse, ville, cp, telPortable, telDomicile, nationalite, numSS, idAutorisation, idPC, idCharte, idMT, idMere, idPere, idSoin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    array($nom, $prenom, $dateNaissance, $lieuNaissance, $adresse, $ville, $cp, $telPortable, $telDomicile, $nationalite, $numSS, $idAutorisation, $idPersonneContact, $idCharte, $idMedecinTraitant, $idMere, $idPere, $idSoin));
                 
 
                     header('Location: ../index.php');
                     exit;
-    
+                    
                 }
             }
     }

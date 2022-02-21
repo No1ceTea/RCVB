@@ -18,7 +18,7 @@
         <input type="text" value=<?php echo $res['cp'];?> name="cp" onFocus="this.value='';" pattern="[0-9]{5}" required>
         <input type="tel" value="<?php echo $res['telPortable'];?>" onFocus="this.value='';" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortable" required> 
         <input type="tel" value="<?php echo $res['telDomicile'];?>" onFocus="this.value='';" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicile" required> 
-        <input type="text" value=<?php echo $res['numSS'];?> name="numSS" pattern="[0-9]{15}"  readonly="readonly">
+        <input type="text" value=<?php echo $res['numSS'];?> name="numSS" pattern="[0-9]{15}">
         <input type="text" value=<?php echo $res['nationalite'];?> onFocus="this.value='';" name="nationalite" required> 
 
         <button type="submit" name="modifProfil">Envoyer</button>
