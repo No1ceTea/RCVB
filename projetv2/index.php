@@ -22,7 +22,7 @@
    $_SESSION["form"]="age";
    ?>
    <a href="vues/choixConnexion.php">Connexion</a>
-   <a href="vues/formReinitialise.php">Réinitialisé son mot de passe</a>
+
   <?php
     }else{ // Sinon s'il y a une session alors on verra les liens ci-dessous
   ?>

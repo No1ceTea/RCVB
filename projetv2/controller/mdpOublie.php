@@ -18,9 +18,9 @@ if($_SESSION['ChoixConnexion']="adherent"){
 
     sendmail($subject, $message, $mail); 
 }
-if($_SESSION['ChoixConnexion']="entraineur"){
-    $DB->insert("update entraineur set mdpTemp='$mdpTemp' where mail='$mail'");
-    $req = $DB->query("SELECT * FROM entraineur WHERE mail = ? ",
+else if($_SESSION['ChoixConnexion']="entraineur"){
+    $DB->insert("update entraineurs set mdpTemp='$mdpTemp' where mail='$mail'");
+    $req = $DB->query("SELECT * FROM entraineurs WHERE mail = ? ",
     array($mail));
     $req = $req->fetch();
 
@@ -29,7 +29,7 @@ if($_SESSION['ChoixConnexion']="entraineur"){
 
     sendmail($subject, $message, $mail);  
 }
-if($_SESSION['ChoixConnexion']="responsable"){
+else if($_SESSION['ChoixConnexion']="responsable"){
     $DB->insert("update responsable set mdpTemp='$mdpTemp' where mail='$mail'");
     $req = $DB->query("SELECT * FROM responsable WHERE mail = ? ",
     array($mail));
@@ -40,7 +40,7 @@ if($_SESSION['ChoixConnexion']="responsable"){
 
     sendmail($subject, $message, $mail); 
 }
-if($_SESSION['ChoixConnexion']="manager"){
+else if($_SESSION['ChoixConnexion']="manager"){
     $DB->insert("update manager set mdpTemp='$mdpTemp' where mail='$mail'");
     $req = $DB->query("SELECT * FROM manager WHERE mail = ? ",
     array($mail));
@@ -52,4 +52,5 @@ if($_SESSION['ChoixConnexion']="manager"){
     sendmail($subject, $message, $mail);
 }
 
+header('Location: ../vues/formReinitialise.php');
 ?>
