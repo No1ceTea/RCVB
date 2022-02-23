@@ -63,6 +63,79 @@
             header("location:../index.php");
         }
 
+        if(isset($_SESSION["autorisation"]) and $_SESSION["autorisation"]=="manager"){
+            $res=$DB->query("select * from manager WHERE idManager='$id'");
+            $res = $res->fetch();
+            if($res['mail']!=$mail){
+                $DB->insert("update manager set mail='$mail' where idManager=$id");
+            }
+            if($res['telPortable']!=$telephone){
+                $DB->insert("update manager set telPortable='$telephone' where idManager=$id");
+            }
+            header("location:../index.php");
+        }
+
+        if(isset($_SESSION["autorisation"]) and $_SESSION["autorisation"]=="mere"){
+            $res=$DB->query("select * from mere WHERE idMere='$id'");
+            $res = $res->fetch();
+            if($res['mail']!=$mail){
+                $DB->insert("update mere set mail='$mail' where idMere=$id");
+            }
+            if($res['adresse']!=$adresse){
+                $DB->insert("update mere set adresse='$adresse' where idMere=$id");
+            }
+            if($res['ville']!=$ville){
+                $DB->insert("update mere set ville='$ville' where idMere=$id");
+            }
+            if($res['cp']!=$cp){
+                $DB->insert("update mere set cp='$cp' where idMere=$id");
+            }
+            if($res['telDomicile']!=$telDomicile){
+                $DB->insert("update mere set telDomicile='$telDomicile' where idMere=$id");
+            }
+            if($res['telPortable']!=$telPortable){
+                $DB->insert("update mere set telPortable='$telPortable' where idMere=$id");
+            }
+            if($res['entreprise']!=$entreprise){
+                $DB->insert("update mere set entreprise='$entreprise' where idMere=$id");
+            }
+            if($res['profession']!=$profession){
+                $DB->insert("update mere set profession='$profession' where idMere=$id");
+            }
+            header("location:../index.php");
+        }
+
+        if(isset($_SESSION["autorisation"]) and $_SESSION["autorisation"]=="pere"){
+            $res=$DB->query("select * from pere WHERE idPere='$id'");
+            $res = $res->fetch();
+            if($res['mail']!=$mail){
+                $DB->insert("update pere set mail='$mail' where idPere=$id");
+            }
+            if($res['adresse']!=$adresse){
+                $DB->insert("update pere set adresse='$adresse' where idPere=$id");
+            }
+            if($res['ville']!=$ville){
+                $DB->insert("update pere set ville='$ville' where idPere=$id");
+            }
+            if($res['cp']!=$cp){
+                $DB->insert("update pere set cp='$cp' where idPere=$id");
+            }
+            if($res['telDomicile']!=$telDomicile){
+                $DB->insert("update pere set telDomicile='$telDomicile' where idPere=$id");
+            }
+            if($res['telPortable']!=$telPortable){
+                $DB->insert("update pere set telPortable='$telPortable' where idPere=$id");
+            }
+            if($res['entreprise']!=$entreprise){
+                $DB->insert("update pere set entreprise='$entreprise' where idPere=$id");
+            }
+            if($res['profession']!=$profession){
+                $DB->insert("update pere set profession='$profession' where idPere=$id");
+            }
+            header("location:../index.php");
+        }
+
+
 
 
 

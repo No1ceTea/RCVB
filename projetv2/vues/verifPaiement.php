@@ -1,6 +1,7 @@
 <?php
   session_start();
   include('../modele/connexionDB.php'); // Fichier PHP contenant la connexion à votre BDD
+  error_reporting(0);
 ?>
 
 <form method="post" action="../controller/choixPaiement.php">

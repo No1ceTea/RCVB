@@ -15,6 +15,8 @@
                   <h5 class='card-title'><?php echo $adherent->prenom ?></h5>
 
                   <a id='mywish' class='btn btn-danger' href='changerCatAdherent.php?idAdh=<?php echo $adherent->idAdh ;?>&select=<?php echo $select ;?>'>changement de catégorie</a>
+                  <br>
+                  <a id='mywish' class='btn btn-danger' href='../../controller/adherent/supprimer2Adherent.php?idAdh=<?php echo $adherent->idAdh ;?>'>supprimer l'adherent</a>
                 </div>
           </div>
           <br>

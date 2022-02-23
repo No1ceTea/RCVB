@@ -22,9 +22,9 @@
         <input type="text" placeholder="Votre adresse" name="adresse" required>
         <input type="text" placeholder="Votre ville" name="ville" required>
         <input type="text" placeholder="Votre code postale" name="cp" pattern="[0-9]{5}" required>
-        <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortable" required> 
-        <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicile" required> 
-        <input type="text" placeholder="Votre numéro de Sécurité social" name="numSS" pattern="[0-9]{15}" required>
+        <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortable">
+        <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicile">
+        <input type="text" placeholder="Votre numéro de Sécurité social" name="numSS" pattern="[0-1]{1}[0-9]{14}" required>
         <input type="text" placeholder="Votre nationalité" name="nationalite" required> 
         <label> piece d'identité : </label>
         <input type="file" name="pieceIdentite" required>
@@ -41,7 +41,7 @@
     <input type="text" placeholder="Votre entreprise" name="entreprisePere" required>
     <input type="text" placeholder="Votre code postale" name="cpPere" pattern="[0-9]{5}" required>
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortablePere" required> 
-    <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicilePere" required> 
+    <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicilePere"> 
     <input type="text" placeholder="Votre profession" name="professionPere" required>   
     <input type="email" placeholder="Adresse mail" name="mailPere" required>
     <input type="password" placeholder="Votre mot de passe" name="mdpPere" required> 
@@ -55,7 +55,7 @@
     <input type="text" placeholder="Votre entreprise" name="entrepriseMere" required>
     <input type="text" placeholder="Votre code postale" name="cpMere" pattern="[0-9]{5}" required>
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableMere" required> 
-    <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileMere" required> 
+    <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileMere"> 
     <input type="text" placeholder="Votre profession" name="professionMere" required>   
     <input type="email" placeholder="Adresse mail" name="mailMere" required>
     <input type="password" placeholder="Votre mot de passe" name="mdpMere" required> 
@@ -85,6 +85,17 @@
     <!-- pour l'autorisation de soin -->
     <br><br>
     <input type="text" placeholder="lieuSoin" name="lieuSoin" required>
+    <input type="text" placeholder="Votre nom" name="nomSoin" required>
+    <input type="text" placeholder="Votre prenom" name="prenomSoin" required> 
+    <select name="qualiteSoin" id="qualiteSoin">
+      <option name="choixS" value="pere">Père</option>
+      <option name="choixS" value="mere">Mère</option>
+      <option name="choixS" value="frere">frère</option>
+      <option name="choixS" value="soeur">Soeur</option>
+      <option name="choixS" value="grand-pere">Grand-père</option>
+      <option name="choixS" value="grand-mere">Grand-mère</option>
+      <option name="choixS" value="ami">Ami</option>
+    </select>
 
     <!-- pour le medecin traitant -->
     <br><br>
@@ -98,15 +109,15 @@
     <input type="text" placeholder="Votre nom" name="nomContact" required>
     <input type="text" placeholder="Votre prenom" name="prenomContact" required> 
     <input type="tel" placeholder="portable : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telPortableContact" required>
-    <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileContact" required> 
+    <input type="tel" placeholder="domicile : 06 06 06 06 06" pattern="[0]{1}[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="telDomicileContact"> 
     <select name="qualiteContact" id="qualiteContact">
-      <option name="choixC" value="adherent">Père</option>
-      <option name="choixC" value="entraineur">Mère</option>
-      <option name="choixC" value="responsable">frère</option>
-      <option name="choixC" value="manager">Soeur</option>
-      <option name="choixC" value="manager">Grand-père</option>
-      <option name="choixC" value="manager">Grand-mère</option>
-      <option name="choixC" value="manager">Ami</option>
+      <option name="choixC" value="pere">Père</option>
+      <option name="choixC" value="mere">Mère</option>
+      <option name="choixC" value="frere">frère</option>
+      <option name="choixC" value="soeur">Soeur</option>
+      <option name="choixC" value="grand-pere">Grand-père</option>
+      <option name="choixC" value="grand-mere">Grand-mère</option>
+      <option name="choixC" value="ami">Ami</option>
     </select>
       <button type="submit" name="inscriptionMineur">Envoyer</button>
 

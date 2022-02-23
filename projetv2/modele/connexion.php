@@ -25,8 +25,7 @@
             $valid=password_verify($mdp, $req['mdp']);
         
             // la requete ne retourne rien
-            if ($req['idAdh'] == ""){
-                $valid = false;
+            if ($valid == false){
                 header('Location: ../vues/choixConnexion.php');
             }
         
@@ -73,8 +72,7 @@
             $valid=password_verify($mdp, $req['mdp']);
         
             // la requete ne retourne rien
-            if ($req['idResp'] == ""){
-                $valid = false;
+            if ($valid == false){
                 header('Location: ../vues/choixConnexion.php');
             }
         
@@ -101,8 +99,7 @@
             $valid=password_verify($mdp, $req['mdp']);
         
             // la requete ne retourne rien
-            if ($req['idManager'] == ""){
-                $valid = false;
+            if ($valid == false){
                 header('Location: ../vues/choixConnexion.php');
             }
         
@@ -117,6 +114,59 @@
                 header('Location: ../index.php');
             }
         }
+        //CONNEXION POUR LE PERE
+        if ($_SESSION['ChoixConnexion']=="pere"){
+
+            $req = $DB->query("SELECT * FROM pere WHERE mail = ? ",
+                array($mail));
+            $req = $req->fetch();
+
+            $valid=password_verify($mdp, $req['mdp']);
+        
+            // la requete ne retourne rien
+            if ($valid == false){
+                header('Location: ../vues/choixConnexion.php');
+            }
+        
+            // la requete retourne le compte
+            if ($valid){
+                $_SESSION['id'] = $req['idPere'];
+                $_SESSION['nom'] = $req['nom'];
+                $_SESSION['prenom'] = $req['prenom'];
+                $_SESSION['mail'] = $req['mail'];
+                $_SESSION['autorisation']='pere';
+                
+                header('Location: ../index.php');
+            }
+        }
+        //CONNEXION POUR LA MERE
+        if ($_SESSION['ChoixConnexion']=="mere"){
+
+            $req = $DB->query("SELECT * FROM mere WHERE mail = ? ",
+                array($mail));
+            $req = $req->fetch();
+
+            $valid=password_verify($mdp, $req['mdp']);
+        
+            // la requete ne retourne rien
+            if ($valid == false){
+                header('Location: ../vues/choixConnexion.php');
+            }
+        
+            // la requete retourne le compte
+            if ($valid){
+                $_SESSION['id'] = $req['idMere'];
+                $_SESSION['nom'] = $req['nom'];
+                $_SESSION['prenom'] = $req['prenom'];
+                $_SESSION['mail'] = $req['mail'];
+                $_SESSION['autorisation']='mere';
+                
+                header('Location: ../index.php');
+            }
+        }
+
+
+
         }
     }
 ?>

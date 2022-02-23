@@ -29,4 +29,4 @@ while($categorie = $res->fetch(PDO::FETCH_OBJ))
 
 <?php
   }
-?> 
+?>
