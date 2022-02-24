@@ -77,17 +77,36 @@
     <label>Droit à l'image</label>
     <input type="radio" name="image" value="1" required> OUI
     <input type="radio" name="image" value="0" required> NON
-
+<?php /*
     <!-- pour la charte -->
-    <br><br>
+    <br><br>Je, soussigné(e) , licencié au RCVB (éducateur, joueur, 
+            dirigeant), adhère à la charte des joueurs du club. 
+            Cela signifie que pour la saison 2020-2021, je m’engage :<br>
+            1/ dans le fonctionnement <br>
+            • À être présent les jours d'entraînement et/ou de match, et à prévenir et justifier de mes
+            absences (téléphone, sms, mail…)<br>
+            • À arriver à l’heure à tous les rendez-vous<br>
+            • À avoir et prendre soin de toutes mes affaires avant, pendant, et après les séances
+            (protège-dents, maillot, short, manteau...)<br>
+            • À aider les coachs à sortir, rincer et ranger tout le matériel nécessaire à la pratique du
+            rugby (entrainement ou match)<br>
+            2/ sur le terrain<br>
+            • À ne pas avoir peur de me faire mal (« le rugby se pratique en sécurité »)<br>
+            • À disposer des 2 ingrédients magiques de l’apprentissage : la CONCENTRATION et
+            l’ENVIE<br>
+            • À apprendre à marquer et faire marquer des essais<br>
+            • À apprendre à plaquer et le faire<br>
+            • À connaitre et respecter les règles du jeu<br>
+            • À respecter ses coéquipiers, les adversaires, les arbitres et les dirigeants (code du
+            sportif)<br>
+            • À avoir un comportement loyal, généreux, combattif et fair-play sur et en dehors du
+            terrain (code du sportif)<br>
+            signé à :
     <input type="text" placeholder="lieuCharte" name="lieuCharte" required>
 
     <!-- pour l'autorisation de soin -->
     <br><br>
-    <input type="text" placeholder="lieuSoin" name="lieuSoin" required>
-    <input type="text" placeholder="Votre nom" name="nomSoin" required>
-    <input type="text" placeholder="Votre prenom" name="prenomSoin" required> 
-    <select name="qualiteSoin" id="qualiteSoin">
+    Je, soussigné <input type="text" placeholder="Votre nom" name="nomSoin" required>, <input type="text" placeholder="Votre prenom" name="prenomSoin" required>      <select name="qualiteSoin" id="qualiteSoin">
       <option name="choixS" value="pere">Père</option>
       <option name="choixS" value="mere">Mère</option>
       <option name="choixS" value="frere">frère</option>
@@ -95,7 +114,20 @@
       <option name="choixS" value="grand-pere">Grand-père</option>
       <option name="choixS" value="grand-mere">Grand-mère</option>
       <option name="choixS" value="ami">Ami</option>
-    </select>
+    </select>,
+
+    en cas d’accident du licencié
+
+    autorise par la présente : 
+    - tout examen ou intervention chirurgicale qui serait nécessaire
+    - le responsable de l’association, du Comité ou de la FFR :
+    - à prendre toutes mesures utiles et notamment à demander son admission
+    en établissement de soins
+    - à reprendre l’enfant à sa sortie, uniquement en cas d’indisponibilité
+    absolue des parents ou du représentant légal du mineur
+
+    Fait à : <input type="text" placeholder="lieuSoin" name="lieuSoin" required>
+    */?>
 
     <!-- pour le medecin traitant -->
     <br><br>

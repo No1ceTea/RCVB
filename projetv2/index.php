@@ -22,6 +22,7 @@
    $_SESSION["form"]="age";
    ?>
    <a href="vues/choixConnexion.php">Connexion</a>
+   <a href="vues/dossierInscription.pdf" download="dossier d'incription">Générer le pdf d'inscription</a>
 
   <?php
     }else{ // Sinon s'il y a une session alors on verra les liens ci-dessous
@@ -68,7 +69,6 @@
   ?>
 <a href="vues/adherent/formMDPAdherent.php">Changer votre mot de passe</a><br>
 <a href="vues/adherent/ModifProfil.php">Modifier mon profil</a><br>
-<a href="controller/test.php">Générer un pdf d'inscription</a><br>
 <a href="vues/reinscriptionMajeur.php">Se réinscrirre pour l'année prochaine</a>
 
 <?php 
@@ -77,7 +77,7 @@
   ?>
 <a href="vues/mere/formMDPMere.php">Changer votre mot de passe</a><br>
 <a href="vues/mere/modifProfil.php">Modifier mon profil</a><br>
-<a href="controller/test.php">Générer un pdf d'inscription</a><br>
+<a href="controller/pdfMere.php">Générer un pdf d'inscription</a><br>
 <a href="vues/reinscriptionMineur.php">Se réinscrirre pour l'année prochaine</a>
 
 
@@ -87,7 +87,7 @@
   ?>
 <a href="vues/pere/formMDPPere.php">Changer votre mot de passe</a><br>
 <a href="vues/pere/modifProfil.php">Modifier mon profil</a><br>
-<a href="controller/test.php">Générer un pdf d'inscription</a><br>
+<a href="controller/pdfPere.php">Générer un pdf d'inscription</a><br>
 <a href="vues/reinscriptionMineur.php">Se réinscrirre pour l'année prochaine</a>
 
 <?php 
